@@ -1,10 +1,10 @@
 import React from "react";
-
+import ClassDashBoard from "./components/ClassDashBoard/";
 
 function App() {
     return (
         <div>
-            Hello   
+            <ClassDashBoard />   
         </div>      
     );
 }
