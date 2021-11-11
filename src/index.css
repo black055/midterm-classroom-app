@@ -40,3 +40,55 @@ code {
   left: 0;
   border-bottom: 5px solid white;
 }
+
+.container-profile {
+  width: 80%;
+  display: grid;
+  position: relative;
+  left: 10%;
+}
+
+.container-profile__header {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 3rem;
+}
+
+.name {
+  display: grid;
+  grid-template-rows: 30px 30px;
+}
+
+.name h3,
+h5 {
+  display: flex;
+  margin-top: 0.25rem;
+}
+
+.name h5 {
+  font-weight: normal;
+}
+
+.profile-avtar {
+  display: grid;
+  grid-template-columns: 4.5rem 10rem auto;
+}
+
+.container-profile__main {
+  display: grid;
+  grid-template-columns: 12rem auto;
+}
+
+.profile-nav {
+  border: 0.05rem solid black;
+  border-radius: 0.5rem;
+  height: fit-content;
+  margin-top: 1.5rem;
+}
+
+.form {
+  margin-top: 0;
+}
+.list-nav {
+  padding: 0;
+}

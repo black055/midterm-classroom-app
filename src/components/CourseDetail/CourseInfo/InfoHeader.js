@@ -14,7 +14,7 @@ export default function InfoHeader({ courseName, briefName, details }) {
           <Typography gutterBottom variant="h4" color="white" component="div" textAlign="center" noWrap="true">
             {courseName}
           </Typography>
-          <Typography variant="h5" color="white" textAlign="center" noWrap="true">
+          <Typography variant="h5" color="white" textAlign="center" display="block" noWrap="true">
             {briefName}
           </Typography>
         </div>
