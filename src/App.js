@@ -1,12 +1,14 @@
 import React from "react";
-import ClassDashBoard from "./components/ClassDashBoard/";
+import ProfileInfo from "./components/profile";
+//import ClassDashBoard from "./components/ClassDashBoard";
 
 function App() {
-    return (
-        <div>
-            <ClassDashBoard />   
-        </div>      
-    );
+  return (
+    <React.StrictMode>
+      {/* <ClassDashBoard /> */}
+      <ProfileInfo />
+    </React.StrictMode>
+  );
 }
 
 export default App;

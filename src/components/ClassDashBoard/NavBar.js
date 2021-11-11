@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
-import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
 import AddClassDialog from "./AddClassDialog";
 
 export default function MenuAppBar({ handleAddClass }) {
@@ -41,7 +41,13 @@ export default function MenuAppBar({ handleAddClass }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -54,7 +60,8 @@ export default function MenuAppBar({ handleAddClass }) {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleClassMenu}
-              color="inherit">
+              color="inherit"
+            >
               <AddIcon />
             </IconButton>
             <Menu
@@ -70,7 +77,8 @@ export default function MenuAppBar({ handleAddClass }) {
                 horizontal: "right",
               }}
               open={Boolean(classAnchorEl)}
-              onClose={handleClassClose}>
+              onClose={handleClassClose}
+            >
               <MenuItem onClick={handleClassClose}>Join Class</MenuItem>
               <MenuItem onClick={handleCreateClass}>Create Class</MenuItem>
             </Menu>
@@ -81,7 +89,8 @@ export default function MenuAppBar({ handleAddClass }) {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleUserMenu}
-              color="inherit">
+              color="inherit"
+            >
               <AccountCircle />
             </IconButton>
             <Menu
@@ -97,8 +106,11 @@ export default function MenuAppBar({ handleAddClass }) {
                 horizontal: "right",
               }}
               open={Boolean(userAnchorEl)}
-              onClose={handleUserClose}>
-              <MenuItem onClick={handleUserClose}>Profile</MenuItem>
+              onClose={handleUserClose}
+            >
+              <MenuItem onClick={handleUserClose} component="a" href="/profile">
+                Profile
+              </MenuItem>
               <MenuItem onClick={handleUserClose}>Log Out</MenuItem>
             </Menu>
           </div>
