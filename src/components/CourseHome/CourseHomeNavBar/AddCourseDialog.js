@@ -5,9 +5,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { createClass } from "../../services/user";
+import { createCourse } from "../../../services/user";
+import { useDispatch } from "react-redux";
 
-export default function FormDialog({ openDialog, handleDialogClose, handleAddClass }) {
+export default function FormDialog({ openDialog, handleDialogClose }) {
+  const dispatch = useDispatch();
   const formRef = useRef();
 
   const handleClose = () => {
@@ -23,9 +25,9 @@ export default function FormDialog({ openDialog, handleDialogClose, handleAddCla
       return;
     }
 
-    createClass({ name: form["name"].value, details: form["detail"].value, briefName: form["briefName"].value }).then(
+    createCourse({ name: form["name"].value, details: form["detail"].value, briefName: form["briefName"].value }).then(
       (res) => {
-        handleAddClass(res.data.item);
+        dispatch({ type: "COURSES_INCREMENT", payload: res.data.item });
       }
     );
     handleDialogClose();

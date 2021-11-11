@@ -1,12 +1,6 @@
 import React from "react";
-import ClassDashBoard from "./components/ClassDashBoard/";
+import MainRoute from "./routes/MainRoute";
 
-function App() {
-    return (
-        <div>
-            <ClassDashBoard />   
-        </div>      
-    );
+export default function App() {
+  return <MainRoute />;
 }
-
-export default App;

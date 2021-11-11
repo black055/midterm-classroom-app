@@ -1,12 +1,12 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import Card from "./Card";
+import Card from "./CourseCard";
 
-export default function ClassList({ classes }) {
+export default function CourseList({ courses }) {
   return (
     <Grid container spacing={{ xs: 2, sm: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {classes &&
-        classes.map((item) => (
+      {courses &&
+        courses.map((item) => (
           <Grid
             item
             xs={4}
@@ -18,7 +18,7 @@ export default function ClassList({ classes }) {
             alignItems="baseline"
             justifyContent="center"
             sx={{ my: "0.8rem" }}>
-            <Card name={item.name} teacherName={item.teacherName} briefName={item.briefName} />
+            <Card id={item._id} name={item.name} teacherName={item.teacherName} briefName={item.briefName} />
           </Grid>
         ))}
     </Grid>
