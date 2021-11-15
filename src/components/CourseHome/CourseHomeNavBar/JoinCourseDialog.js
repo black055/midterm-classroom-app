@@ -5,11 +5,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { createCourse } from "../../../services/user";
-import { useDispatch } from "react-redux";
+import { joinCourse } from "../../../services/user";
+import { useNavigate } from "react-router-dom";
 
-export default function FormDialog({ openDialog, handleDialogClose }) {
-  const dispatch = useDispatch();
+export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
+  const navigate = useNavigate();
   const formRef = useRef();
 
   const handleClose = () => {
@@ -20,14 +20,23 @@ export default function FormDialog({ openDialog, handleDialogClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
-    if (!form["name"].value) {
+    if (!form["code"].value) {
       //message
       return;
     }
 
-    createCourse(form["name"].value, form["details"].value, form["briefName"].value).then((res) => {
-      dispatch({ type: "COURSES_INCREMENT", payload: res.data.payload });
-    });
+    joinCourse(form["code"].value)
+      .then((res) => {
+        navigate("/course/" + res.data.payload._id);
+      })
+      .catch((e) => {
+        if (e.response) {
+          // Request made and server responded
+          console.log(e.response.data.message);
+          console.log(e.response.status);
+          console.log(e.response.headers);
+        }
+      });
     handleDialogClose();
     formRef.current.reset();
   };
@@ -40,28 +49,18 @@ export default function FormDialog({ openDialog, handleDialogClose }) {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="Class name (required)"
+            id="code"
+            label="Code (required)"
             type="text"
             fullWidth
             variant="standard"
-            name="name"
+            name="code"
           />
-          <TextField
-            margin="dense"
-            id="briefName"
-            label="Section"
-            type="text"
-            fullWidth
-            variant="standard"
-            name="briefName"
-          />
-          <TextField margin="dense" id="details" label="Details" type="text" fullWidth variant="standard" name="details" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" onClick={handleSubmit}>
-            Create
+            Join
           </Button>
         </DialogActions>
       </form>

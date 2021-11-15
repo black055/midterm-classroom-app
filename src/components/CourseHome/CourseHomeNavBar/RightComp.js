@@ -4,10 +4,12 @@ import AddIcon from "@mui/icons-material/Add";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AddCourseDialog from "./AddCourseDialog";
+import JoinCourseDialog from "./JoinCourseDialog";
 import UserButton from "../../UserButton";
 
 export default function RightComp() {
-  const [isOpened, setIsOpened] = useState(false);
+  const [isAddingOpen, setIsAddingOpen] = useState(false);
+  const [isJoiningOpen, setIsJoiningOpen] = useState(false);
   const [classAnchorEl, setClassAnchorEl] = useState(null);
 
   const handleClassMenu = (event) => {
@@ -15,14 +17,18 @@ export default function RightComp() {
   };
 
   const handleCreateClass = () => {
-    setIsOpened(!isOpened);
+    setIsAddingOpen(!isAddingOpen);
+    handleClassClose();
+  };
+
+  const handleJoinClass = () => {
+    setIsJoiningOpen(!isJoiningOpen);
     handleClassClose();
   };
 
   const handleClassClose = () => {
     setClassAnchorEl(null);
   };
-
 
   return (
     <React.Fragment>
@@ -49,16 +55,15 @@ export default function RightComp() {
         }}
         open={Boolean(classAnchorEl)}
         onClose={handleClassClose}>
-        <MenuItem onClick={handleClassClose}>Join Class</MenuItem>
+        <MenuItem onClick={handleJoinClass}>Join Class</MenuItem>
         <MenuItem onClick={handleCreateClass}>Create Class</MenuItem>
       </Menu>
 
       <UserButton />
 
-      <AddCourseDialog
-        openDialog={isOpened}
-        handleDialogClose={() => setIsOpened(!isOpened)}
-      />
+      <AddCourseDialog openDialog={isAddingOpen} handleDialogClose={() => setIsAddingOpen(!isAddingOpen)} />
+
+      <JoinCourseDialog openDialog={isJoiningOpen} handleDialogClose={() => setIsJoiningOpen(!isJoiningOpen)} />
     </React.Fragment>
   );
 }
