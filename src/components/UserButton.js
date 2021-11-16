@@ -5,7 +5,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
 
+import { logout } from "../services/auth";
+import { useDispatch } from "react-redux";
+
 export default function UserButton() {
+  const dispatch = useDispatch();
   const [userAnchorEl, setUserAnchorEl] = useState(null);
   // const navigate = useNavigate();
 
@@ -15,6 +19,11 @@ export default function UserButton() {
 
   const handleUserClose = () => {
     setUserAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleUserClose();
+    dispatch(logout());
   };
 
   return (
@@ -47,7 +56,7 @@ export default function UserButton() {
         <MenuItem component="a" href="/user/profile">
           Profile
         </MenuItem>
-        <MenuItem onClick={handleUserClose}>Log Out</MenuItem>
+        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
       </Menu>
     </Box>
   );

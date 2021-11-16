@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { IconButton, Button, MenuItem, Menu } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import AddCourseDialog from "./AddCourseDialog";
 import UserButton from "../../UserButton";
 
 export default function RightComp() {
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+
   const [isOpened, setIsOpened] = useState(false);
   const [classAnchorEl, setClassAnchorEl] = useState(null);
 
@@ -22,8 +24,7 @@ export default function RightComp() {
   const handleClassClose = () => {
     setClassAnchorEl(null);
   };
-
-
+  if (loggedIn) {
   return (
     <React.Fragment>
       <IconButton
@@ -59,6 +60,12 @@ export default function RightComp() {
         openDialog={isOpened}
         handleDialogClose={() => setIsOpened(!isOpened)}
       />
+    </React.Fragment>
+  );
+  } else return (
+    <React.Fragment sx={{ marginLeft: 'auto' }}>
+      <Button component={Link} to={'/register'} color="inherit">đăng ký</Button>
+      <Button component={Link} to={'/login'} color="inherit">đăng nhập</Button>
     </React.Fragment>
   );
 }
