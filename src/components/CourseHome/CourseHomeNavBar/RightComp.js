@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 import { IconButton, Button, MenuItem, Menu } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddCourseDialog from "./AddCourseDialog";
+import JoinCourseDialog from "./JoinCourseDialog";
 import UserButton from "../../UserButton";
 
 export default function RightComp() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
   const [isOpened, setIsOpened] = useState(false);
+  const [isAddingOpen, setIsAddingOpen] = useState(false);
+  const [isJoiningOpen, setIsJoiningOpen] = useState(false);
   const [classAnchorEl, setClassAnchorEl] = useState(null);
 
   const handleClassMenu = (event) => {
@@ -17,13 +20,19 @@ export default function RightComp() {
   };
 
   const handleCreateClass = () => {
-    setIsOpened(!isOpened);
+    setIsAddingOpen(!isAddingOpen);
+    handleClassClose();
+  };
+
+  const handleJoinClass = () => {
+    setIsJoiningOpen(!isJoiningOpen);
     handleClassClose();
   };
 
   const handleClassClose = () => {
     setClassAnchorEl(null);
   };
+
   if (loggedIn) {
   return (
     <React.Fragment>
@@ -50,16 +59,15 @@ export default function RightComp() {
         }}
         open={Boolean(classAnchorEl)}
         onClose={handleClassClose}>
-        <MenuItem onClick={handleClassClose}>Join Class</MenuItem>
+        <MenuItem onClick={handleJoinClass}>Join Class</MenuItem>
         <MenuItem onClick={handleCreateClass}>Create Class</MenuItem>
       </Menu>
 
       <UserButton />
 
-      <AddCourseDialog
-        openDialog={isOpened}
-        handleDialogClose={() => setIsOpened(!isOpened)}
-      />
+      <AddCourseDialog openDialog={isAddingOpen} handleDialogClose={() => setIsAddingOpen(!isAddingOpen)} />
+
+      <JoinCourseDialog openDialog={isJoiningOpen} handleDialogClose={() => setIsJoiningOpen(!isJoiningOpen)} />
     </React.Fragment>
   );
   } else return (

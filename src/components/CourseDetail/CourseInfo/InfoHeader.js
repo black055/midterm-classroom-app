@@ -11,10 +11,10 @@ export default function InfoHeader({ courseName, briefName, details }) {
       <CardActionArea onClick={() => setDropDown(!dropDown)}>
         <CardMedia component="img" height="220" image="/static/images/banner.png" alt="green iguana" />
         <div className={classes.font}>
-          <Typography gutterBottom variant="h4" color="white" component="div" textAlign="center" noWrap="true">
+          <Typography gutterBottom variant="h4" color="white" component="div" textAlign="center" noWrap={true}>
             {courseName}
           </Typography>
-          <Typography variant="h5" color="white" textAlign="center" display="block" noWrap="true">
+          <Typography variant="h5" color="white" textAlign="center" display="block" noWrap={true}>
             {briefName}
           </Typography>
         </div>
