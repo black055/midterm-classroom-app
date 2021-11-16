@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
 const API_URL = "http://localhost:3000/auth";
 
 export function verifyGoogleToken(tokenId) {

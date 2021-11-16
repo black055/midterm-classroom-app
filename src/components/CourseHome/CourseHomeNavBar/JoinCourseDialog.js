@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { joinCourse } from "../../../services/user";
+import { joinCourse } from "../../../services/course";
 import { useNavigate } from "react-router-dom";
 
 export default function JoinCourseDialog({ openDialog, handleDialogClose }) {

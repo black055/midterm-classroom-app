@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { createCourse } from "../../../services/user";
+import { createCourse } from "../../../services/course";
 import { useDispatch } from "react-redux";
 
 export default function FormDialog({ openDialog, handleDialogClose }) {

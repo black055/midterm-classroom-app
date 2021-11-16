@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CourseHomeNavBar from "../components/CourseHome/CourseHomeNavBar/";
 import CourseList from "../components/CourseHome/CourseList/";
-import { getCourses } from "../services/user";
+import { getCourses } from "../services/course";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ClassHome() {

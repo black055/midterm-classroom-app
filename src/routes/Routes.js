@@ -7,6 +7,7 @@ export function AuthRoute({ loggedIn, path, component: Component }) {
         path={path}
         render={(props) => {
             return (loggedIn) ? <Navigate to={`/`} /> : <Component {...props} />
-        }} />
+        }} 
+    />
   );
 }

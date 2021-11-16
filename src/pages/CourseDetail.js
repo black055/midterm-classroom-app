@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import CourseDetailNavBar from "../components/CourseDetail/CourseDetailNavBar/";
-import { getOneCourse } from "../services/user";
+import { getOneCourse } from "../services/course";
 import CourseInfo from "../components/CourseDetail/CourseInfo/";
 import CoursePeople from "../components/CourseDetail/CoursePeople/";
 
