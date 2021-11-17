@@ -24,7 +24,7 @@ export default function CourseInfo() {
         <CodeCard code={course.code} />
       </Grid>
       <Grid item xs={12} md={9}>
-        <InvitationCard />
+        <InvitationCard course={course}/>
       </Grid>
     </Grid>
   );

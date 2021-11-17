@@ -1,13 +1,10 @@
 import React from "react";
-import { Navigate, Route } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export function AuthRoute({ loggedIn, path, component: Component }) {
-  return (
-    <Route
-        path={path}
-        render={(props) => {
-            return (loggedIn) ? <Navigate to={`/`} /> : <Component {...props} />
-        }} 
-    />
-  );
+export function AuthRoute({ loggedIn }) {
+  return loggedIn ? <Navigate to={`/`} /> : <Outlet />;
+}
+
+export function PrivateRoute({ loggedIn }) {
+  return loggedIn ? <Outlet /> : <Navigate to={`/login`} />;
 }
