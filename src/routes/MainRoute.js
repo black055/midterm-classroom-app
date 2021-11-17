@@ -9,6 +9,7 @@ import ProfilePage from "../pages/ProfilePage";
 import Login from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import { AuthRoute, PrivateRoute } from "./Routes";
+import { UnexpectedComponent } from "../pages/404";
 
 export default function MainRoute() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -30,6 +31,7 @@ export default function MainRoute() {
         <Route path="/" element={<PrivateRoute loggedIn={loggedIn} />}>
           <Route path="/" element={<CourseHome />} />
         </Route>
+        <Route path="/404" element={<UnexpectedComponent />} />
       </Routes>
 
       <ToastContainer

@@ -7,7 +7,7 @@ export default function TeacherList({ teachers }) {
       {teachers ? (
         teachers.map((t, index) => (
           <Grid item xs={4} sm={4} md={4} key={index}>
-            <Typography variant="h6">{t && t.name}</Typography>
+            <Typography variant="h6">{t}</Typography>
           </Grid>
         ))
       ) : (

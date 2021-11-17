@@ -7,7 +7,7 @@ export default function StudentList({ students }) {
       {students ? (
         students.map((s, index) => (
           <Grid item xs={4} sm={4} md={4} key={index}>
-            <Typography variant="h6">{s && s.name}</Typography>
+            <Typography variant="h6">{s}</Typography>
           </Grid>
         ))
       ) : (

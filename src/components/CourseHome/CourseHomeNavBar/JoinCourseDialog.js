@@ -27,7 +27,7 @@ export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
 
     joinCourse(form["code"].value)
       .then((res) => {
-        navigate("/course/" + res.data.payload._id);
+        navigate("/course/" + res.data.payload._id + "/info");
       })
       .catch((e) => {
         if (e.response) {
