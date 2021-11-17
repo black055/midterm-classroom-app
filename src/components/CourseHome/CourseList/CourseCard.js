@@ -52,7 +52,7 @@ export default function MultiActionAreaCard({ id, name, teacherName = "Tên giá
               }
               subheader={teacherName}
           />
-        <CardActionArea onClick={() => navigate("/course/" + id)}>
+        <CardActionArea onClick={() => navigate("/course/" + id + "/info")}>
           <CardMedia
               component="img"
               height="194"

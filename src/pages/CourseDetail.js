@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes, useParams, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import CourseDetailNavBar from "../components/CourseDetail/CourseDetailNavBar/";
 import { getOneCourse } from "../services/course";
 import CourseInfo from "../components/CourseDetail/CourseInfo/";
@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 export default function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { name } = useSelector((state) => state.course.item);
 
   useEffect(() => {
