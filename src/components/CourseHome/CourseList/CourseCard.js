@@ -1,58 +1,86 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import ShareIcon from "@mui/icons-material/Share";
-import { CardActionArea, CardActions, IconButton } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Grid, Card, CardHeader, CardMedia, CardActions, Avatar, IconButton, CardActionArea, CardContent, Collapse, styled
+} from '@mui/material';
+import { 
+  MoreVert as MoreVertIcon,
+  ContentCopy as ContentCopyIcon,
+  AssignmentIndOutlined as PeopleOutlineIcon,
+  ExpandMore as ExpandMoreIcon,
+} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 
-export default function MultiActionAreaCard({ id, name, teacherName, briefName }) {
-  const classes = useStyles();
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+export default function MultiActionAreaCard({ id, name, teacherName = "Tên giáo viên", briefName, details }) {
   const navigate = useNavigate();
+  const bgcolor = {backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16)};
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
-    <Card sx={{ maxWidth: 345 }} className={classes.root}>
-      <CardActionArea onClick={() => navigate("/course/" + id)}>
-        <CardMedia component="img" height="140" image="/static/images/banner.png" alt="green iguana" />
-        <div className={classes.font}>
-          <Typography gutterBottom variant="h5" color="white" component="div" noWrap={true} className={classes.stroke}>
-            {name}
-          </Typography>
-          <Typography variant="body2" color="white" noWrap={true} className={classes.stroke}>
-            {briefName}
-          </Typography>
-          <Typography variant="body2" color="white" noWrap={true} className={classes.stroke}>
-            {teacherName}
-          </Typography>
-        </div>
-        <CardContent />
-      </CardActionArea>
-      <CardActions>
-        <IconButton size="medium" color="primary">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <Grid item xs={4} key={id}>
+      <Card className='course-card'>
+      
+          <CardHeader 
+              avatar={
+                  <Avatar style={bgcolor}>
+                      {briefName.slice(0,2)}
+                  </Avatar>
+              }
+              action={
+                  <IconButton aria-label="settings" onClick={() => console.log('ok')}>
+                    <MoreVertIcon />
+                  </IconButton>
+              }
+              title={
+                <strong>
+                  [{briefName}] {name}
+                </strong>
+                
+              }
+              subheader={teacherName}
+          />
+        <CardActionArea onClick={() => navigate("/course/" + id)}>
+          <CardMedia
+              component="img"
+              height="194"
+              image="https://www.viewsonic.com/library/wp-content/uploads/2021/01/LB0032-696x463.jpg"
+          />
+        </CardActionArea>
+          <CardActions disableSpacing>
+              <IconButton aria-label="copy invite link" title="Sao chép link mời">
+                  <ContentCopyIcon />
+              </IconButton>
+              <IconButton aria-label="user list" title="Danh sách giáo viên và học sinh">
+                  <PeopleOutlineIcon />
+              </IconButton>
+              <ExpandMore title="Thêm thông tin"
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </ExpandMore>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          {details}
+        </CardContent>
+      </Collapse>
+      </Card>
+  </Grid>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  root: {
-    position: "relative",
-  },
-  font: {
-    position: "absolute",
-    top: "16%",
-    width: "100%",
-    textAlign: "left",
-    marginLeft: "0.5rem",
-    color: "black",
-    backgroundColor: "none",
-    fontFamily: "Comic Sans MS",
-  },
-  stroke: {
-    textShadow: "1px 1px 0 #000",
-  },
-}));
