@@ -10,7 +10,6 @@ import UserButton from "../../UserButton";
 export default function RightComp() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
-  const [isOpened, setIsOpened] = useState(false);
   const [isAddingOpen, setIsAddingOpen] = useState(false);
   const [isJoiningOpen, setIsJoiningOpen] = useState(false);
   const [classAnchorEl, setClassAnchorEl] = useState(null);

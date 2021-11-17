@@ -7,11 +7,12 @@ import React, { useState } from "react";
 
 import { logout } from "../services/auth";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function UserButton() {
   const dispatch = useDispatch();
   const [userAnchorEl, setUserAnchorEl] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleUserMenu = (event) => {
     setUserAnchorEl(event.currentTarget);
@@ -53,7 +54,7 @@ export default function UserButton() {
         open={Boolean(userAnchorEl)}
         onClose={handleUserClose}
       >
-        <MenuItem component="a" href="/user/profile">
+        <MenuItem onClick={() => navigate("/user/u/profile")}>
           Profile
         </MenuItem>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>

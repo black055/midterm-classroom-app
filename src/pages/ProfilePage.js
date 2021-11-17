@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import CourseHomeNavBar from "../components/CourseHome/CourseHomeNavBar";
 import ChangePassWord from "../components/profile/ChangePassWord";
 import Profile from "../components/profile/Profile";
@@ -8,8 +8,8 @@ function ProfilePage() {
     <>
       <CourseHomeNavBar />
       <Routes>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/password" element={<ChangePassWord />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="password" element={<ChangePassWord />} />
       </Routes>
     </>
   );

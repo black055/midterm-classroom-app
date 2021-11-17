@@ -14,7 +14,7 @@ export default function MultiActionAreaCard({ id, name, teacherName, briefName }
 
   return (
     <Card sx={{ maxWidth: 345 }} className={classes.root}>
-      <CardActionArea onClick={() => navigate("/course/" + id)}>
+      <CardActionArea onClick={() => navigate("/course/" + id + "/info")}>
         <CardMedia component="img" height="140" image="/static/images/banner.png" alt="green iguana" />
         <div className={classes.font}>
           <Typography gutterBottom variant="h5" color="white" component="div" noWrap={true} className={classes.stroke}>
