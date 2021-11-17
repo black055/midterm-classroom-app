@@ -23,3 +23,11 @@ export function createCourse(name, details, briefName) {
 export function joinCourse(code) {
   return axios.post(API_URL + "join?code=" + code);
 }
+
+export function inviteTeacher(email, course) {
+  return axios.post(API_URL + "invite/teacher", { email, course });
+}
+
+export function inviteStudent(email, course) {
+  return axios.post(API_URL + "invite/student", { email, course });
+}
