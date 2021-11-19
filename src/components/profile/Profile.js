@@ -1,34 +1,75 @@
 import { MenuItem } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../../services/user";
+import CourseHomeNavBar from "../CourseHome/CourseHomeNavBar";
 import AccountInfo from "./AccountInfo";
 import NavSidebar from "./NavSidebar";
 
-const genders = ["Male", "Female"];
+const genders = ["Nam", "Nữ", "Khác"];
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
-function Profile() {
-  const [studentID, setStudentID] = useState("18120653");
-  const [email, setEmail] = useState("truongvukt2000@gmail.com"); //@ = %40
-  const [firstName, setFirstName] = useState("Vu");
-  const [lastName, setLastName] = useState("Luu");
-  const [gender, setGender] = useState("Male");
-  const handleSubmit = () => {};
+function Profile({ info }) {
+  const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const [studentID, setStudentID] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [genderUser, setGenderUser] = useState("");
+
+  let statusID = false; // if studentID doesn't have value, user can fill
+  if (info.studentID) {
+    // opposite above
+    statusID = true;
+  }
+
+  useEffect(() => {
+    setStudentID(info.studentID);
+    setFirstName(info.firstname);
+    setLastName(info.lastname);
+    setGenderUser(info.gender);
+  }, [info.studentID, info.firstname, info.lastname, info.gender]);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(true);
+    updateProfile(studentID, firstName, lastName, genderUser).then((res) => {
+      dispatch({ type: "USER_UPDATE", payload: res.data });
+    });
+  };
   return (
     <>
+      <CourseHomeNavBar />
       <div className="container-profile">
         <AccountInfo />
         <div className="container-profile__main">
           <NavSidebar choose="profile" />
           <div className="form">
-            <form method="get" className="update-profile">
+            <form method="post" className="update-profile">
               <DialogContent>
                 <TextField
                   required
+                  disabled={statusID}
                   variant="outlined"
-                  name="studentId"
+                  name="studentID"
                   label="Student ID"
                   color="primary"
                   value={studentID}
@@ -40,20 +81,18 @@ function Profile() {
                   helperText="Your ID help you to view your grades"
                 />
                 <TextField
+                  disabled
                   variant="outlined"
                   name="email"
                   label="Email"
                   color="primary"
                   fullWidth
                   margin="dense"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  value={info.email}
                 />
                 <TextField
                   variant="outlined"
-                  name="firstName"
+                  name="firstname"
                   label="First Name"
                   color="primary"
                   fullWidth
@@ -65,7 +104,7 @@ function Profile() {
                 />
                 <TextField
                   variant="outlined"
-                  name="lastName"
+                  name="lastname"
                   label="Last Name"
                   color="primary"
                   fullWidth
@@ -82,10 +121,10 @@ function Profile() {
                   color="primary"
                   fullWidth
                   margin="dense"
-                  value={gender}
+                  value={genderUser}
                   select
                   onChange={(e) => {
-                    setGender(e.target.value);
+                    setGenderUser(e.target.value);
                   }}
                 >
                   {genders.map((gender, index) => (
@@ -110,6 +149,19 @@ function Profile() {
                       Update profile
                     </span>
                   </Button>
+                  <Snackbar
+                    open={open}
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="success"
+                      sx={{ width: "100%" }}
+                    >
+                      Updated Successfully!
+                    </Alert>
+                  </Snackbar>
                 </DialogActions>
               </DialogContent>
             </form>

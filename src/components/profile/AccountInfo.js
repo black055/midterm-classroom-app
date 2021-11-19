@@ -1,8 +1,15 @@
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 function AccountInfo() {
-  const userName = "VuLuu";
+  const user = useSelector((state) => state.user);
+  const userName =
+    user.firstname || user.lastname
+      ? user.firstname + user.lastname
+      : user.email;
+
   return (
     <div className="container-profile__header">
       <div className="profile-avtar">
@@ -15,7 +22,6 @@ function AccountInfo() {
         </div>
       </div>
       <Button
-        href="/"
         variant="outlined"
         className="back-btn"
         sx={{
@@ -27,7 +33,9 @@ function AccountInfo() {
           right: 20,
         }}
       >
-        Go to your class list
+        <Link to="/" style={{ textDecoration: "none", color: "#0984e3" }}>
+          Go to your class list
+        </Link>
       </Button>
     </div>
   );
