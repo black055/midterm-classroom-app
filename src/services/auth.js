@@ -7,12 +7,8 @@ export function verifyGoogleToken(tokenId) {
     axios
       .post(API_URL + "/google", { tokenId })
       .then((res) => {
-        if (res.data.success) {
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          dispatch({ type: "LOGIN_SUCCESS", token: res.data.token });
-        } else {
-          console.log("new account");
-        }
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        dispatch({ type: "LOGIN_SUCCESS", token: res.data.token });
       })
       .catch((err) => {
         console.log("Unauthorized");

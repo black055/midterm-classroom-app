@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, CardHeader, CardMedia, CardActions, Avatar, IconButton, CardActionArea, CardContent, Collapse, styled
+import { Tooltip, Grid, Card, CardHeader, CardMedia, CardActions, Avatar, IconButton, CardActionArea, CardContent, Collapse, styled
 } from '@mui/material';
 import { 
   MoreVert as MoreVertIcon,
@@ -60,20 +60,24 @@ export default function MultiActionAreaCard({ id, name, teacherName = "Tên giá
           />
         </CardActionArea>
           <CardActions disableSpacing>
-              <IconButton aria-label="copy invite link" title="Sao chép link mời">
+            <Tooltip title="Sao chép link mời">
+              <IconButton aria-label="copy invite link">
                   <ContentCopyIcon />
               </IconButton>
-              <IconButton aria-label="user list" title="Danh sách giáo viên và học sinh">
+            </Tooltip>
+            <Tooltip title="Danh sách giáo viên và học sinh">
+              <IconButton aria-label="user list">
                   <PeopleOutlineIcon />
               </IconButton>
-              <ExpandMore title="Thêm thông tin"
+            </Tooltip>
+              <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}
                   aria-expanded={expanded}
                   aria-label="show more"
                 >
                   <ExpandMoreIcon />
-                </ExpandMore>
+              </ExpandMore>
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

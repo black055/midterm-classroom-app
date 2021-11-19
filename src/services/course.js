@@ -16,6 +16,10 @@ export function getOneCourse(id) {
   return axios.get(API_URL + id);
 }
 
+export function getPublicInfoCourse(id) {
+  return axios.get(API_URL + 'public/' + id);
+}
+
 export function createCourse(name, details, briefName) {
   return axios.post(API_URL, { name, details, briefName });
 }

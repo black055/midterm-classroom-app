@@ -8,6 +8,8 @@ import CourseHome from "../pages/CourseHome";
 import ProfilePage from "../pages/ProfilePage";
 import Login from "../pages/Login";
 import RegisterPage from "../pages/Register";
+import StudentConfirmPage from "../pages/StudentConfirmPage";
+import TeacherConfirmPage from "../pages/TeacherConfirmPage";
 import { AuthRoute, PrivateRoute } from "./Routes";
 import { UnexpectedComponent } from "../pages/404";
 
@@ -27,6 +29,10 @@ export default function MainRoute() {
         </Route>
         <Route path="/course" element={<PrivateRoute loggedIn={loggedIn} />}>
           <Route path=":id/*" element={<CourseDetail />} />
+        </Route>
+        <Route path="/invite" element={<PrivateRoute loggedIn={loggedIn} />}>
+          <Route path="student/:id" element={<StudentConfirmPage />} />
+          <Route path="teacher/:id" element={<TeacherConfirmPage />} />
         </Route>
         <Route path="/" element={<PrivateRoute loggedIn={loggedIn} />}>
           <Route path="/" element={<CourseHome />} />
