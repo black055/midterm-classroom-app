@@ -1,20 +1,66 @@
+import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
+import { updatePassword } from "../../services/user";
+import CourseHomeNavBar from "../CourseHome/CourseHomeNavBar";
 import AccountInfo from "./AccountInfo";
 import NavSidebar from "./NavSidebar";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function ChangePassWord() {
-  //const currentPass = "123123";
+  const [open, setOpen] = useState(false);
+  const [notification, setNotification] = useState("");
+  const [contentAlert, setContentAlert] = useState("");
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmNewPass, setConfirmNewPass] = useState("");
 
-  const handleSubmit = (e) => {};
+  const clearState = () => {
+    setOldPass("");
+    setNewPass("");
+    setConfirmNewPass("");
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setNotification("error");
+    setContentAlert("Please fill in this form!");
+
+    if (newPass !== confirmNewPass) {
+      //message change fail
+      setNotification("error");
+      setContentAlert("New password does not match!");
+    } else {
+      //message change fail
+      setNotification("error");
+      setContentAlert("Incorrect password!");
+      updatePassword(oldPass, newPass).then((res) => {
+        //message change success
+        setNotification("success");
+        setContentAlert("Updated Successfully!");
+      });
+    }
+    setOpen(true);
+    clearState();
+  };
   return (
     <>
+      <CourseHomeNavBar />
       <div className="container-profile">
         <AccountInfo />
         <div className="container-profile__main">
@@ -32,32 +78,27 @@ function ChangePassWord() {
                   margin="dense"
                   fullWidth
                   onChange={(e) => {
-                    console.log(e.target.value);
                     setOldPass(e.target.value);
                   }}
                 />
                 <TextField
-                  id="outlined-password-input"
                   label="New password"
                   value={newPass}
                   margin="dense"
                   fullWidth
                   type="password"
                   name="newPassword"
-                  autoComplete="current-password"
                   onChange={(e) => {
                     setNewPass(e.target.value);
                   }}
                 />
                 <TextField
-                  id="outlined-password-input"
                   label="Confirm new password"
                   value={confirmNewPass}
                   margin="dense"
                   fullWidth
                   type="password"
                   name="confirmPassword"
-                  autoComplete="current-password"
                   onChange={(e) => {
                     setConfirmNewPass(e.target.value);
                   }}
@@ -78,6 +119,19 @@ function ChangePassWord() {
                       Update password
                     </span>
                   </Button>
+                  <Snackbar
+                    open={open}
+                    autoHideDuration={5000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity={notification}
+                      sx={{ width: "100%" }}
+                    >
+                      {contentAlert}
+                    </Alert>
+                  </Snackbar>
                 </DialogActions>
               </DialogContent>
             </form>

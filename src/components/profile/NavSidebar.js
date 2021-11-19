@@ -2,8 +2,8 @@ import { Divider } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavSidebar({ choose }) {
   return (
@@ -14,22 +14,24 @@ function NavSidebar({ choose }) {
       <Divider />
       <List>
         <ListItem disablePadding>
-          <ListItemButton
-            component="a"
-            href="/user/profile"
-            selected={choose === "profile"}
-          >
-            <ListItemText primary="Profile" />
+          <ListItemButton selected={choose === "profile"}>
+            <Link
+              to="/user/u/profile"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Profile
+            </Link>
           </ListItemButton>
         </ListItem>
         <Divider />
         <ListItem disablePadding>
-          <ListItemButton
-            component="a"
-            href="/user/password"
-            selected={choose === "password"}
-          >
-            <ListItemText primary="Change Password" />
+          <ListItemButton selected={choose === "password"}>
+            <Link
+              to="/user/u/password"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Change Password
+            </Link>
           </ListItemButton>
         </ListItem>
       </List>

@@ -1,17 +1,17 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UnexpectedComponent } from "../pages/404";
 import CourseDetail from "../pages/CourseDetail";
 import CourseHome from "../pages/CourseHome";
-import ProfilePage from "../pages/ProfilePage";
 import Login from "../pages/Login";
+import ProfilePage from "../pages/ProfilePage";
 import RegisterPage from "../pages/Register";
 import StudentConfirmPage from "../pages/StudentConfirmPage";
 import TeacherConfirmPage from "../pages/TeacherConfirmPage";
 import { AuthRoute, PrivateRoute } from "./Routes";
-import { UnexpectedComponent } from "../pages/404";
 
 export default function MainRoute() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);

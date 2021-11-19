@@ -4,10 +4,9 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
-
-import { logout } from "../services/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../services/auth";
 
 export default function UserButton() {
   const dispatch = useDispatch();
@@ -54,7 +53,12 @@ export default function UserButton() {
         open={Boolean(userAnchorEl)}
         onClose={handleUserClose}
       >
-        <MenuItem onClick={() => navigate("/user/u/profile")}>
+        <MenuItem
+          onClick={() => {
+            navigate("/user/u/profile");
+            handleUserClose();
+          }}
+        >
           Profile
         </MenuItem>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>

@@ -7,3 +7,7 @@ export const COURSE_EMPTY = "COURSE_EMPTY";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
+
+export const USER_EMPTY = "USER_EMPTY";
+export const USER_FETCHED = "USER_FETCHED";
+export const USER_UPDATE = "USER_UPDATE";
