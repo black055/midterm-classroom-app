@@ -15,6 +15,7 @@ export default function CourseDetail() {
   useEffect(() => {
     dispatch(async (dispatch) => {
       return getOneCourse(id).then((res) => {
+        console.log(res);
         if (res.status === 200) {
           dispatch({ type: "COURSE_FETCHED", payload: res.data.payload });
         }

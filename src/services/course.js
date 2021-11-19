@@ -16,16 +16,19 @@ export function getOneCourse(id) {
   return axios.get(API_URL + id);
 }
 
-export function getPublicInfoCourse(id) {
-  return axios.get(API_URL + 'public/' + id);
+export function getPublicInfoCourse(id, inviteCode, teacherInvite = false) {
+  const url = teacherInvite ? 
+    API_URL + 'public/' + id + '?inviteCode=' + inviteCode : 
+    API_URL + 'public/' + id + '?code=' + inviteCode
+  return axios.get(url);
 }
 
 export function createCourse(name, details, briefName) {
   return axios.post(API_URL, { name, details, briefName });
 }
 
-export function joinCourse(code) {
-  return axios.post(API_URL + "join?code=" + code);
+export function joinCourse(code, teacherInvite = false) {
+  return axios.post(API_URL + "join", { code, teacherInvite });
 }
 
 export function inviteTeacher(email, course) {

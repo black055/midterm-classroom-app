@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Paper } from '@mui/material'
 import { useParams, useLocation } from "react-router-dom";
 import { getPublicInfoCourse } from "../services/course";
 import { toast } from "react-toastify";
 import ConfirmDialog from "../components/ConfirmPage/Student/ConfirmDialog";
+import InvalidCode from "../components/ConfirmPage/InvalidCode";
 import { Navigate } from "react-router-dom";
 
 function useQuery() {
@@ -12,24 +12,34 @@ function useQuery() {
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
-function TeacherConfirmPage() {
+function StudentConfirmPage() {
     const [alreadyIn, setAlreadyIn] = useState(false);
+    const [invalidCode, setInvalidCode] = useState(false);
     const dispatch = useDispatch();
     const { id } = useParams();
-    let query = useQuery(); //query.get('params')
+    let query = useQuery();
 
 
     useEffect(() => {
         dispatch(async (dispatch) => {
-          return getPublicInfoCourse(id).then((res) => {
+          return getPublicInfoCourse(id, query.get('code')).then((res) => {
             if (res.status === 200) {
                 dispatch({ type: "COURSE_FETCHED", payload: res.data.payload });
             }
             if (res.status === 202) {
-              if (res.data.message === "ALREADY_IN") {
-                toast.info('Bạn đã tham gia lớp học');
-                setAlreadyIn(true);
-              } else toast.warning(res.data.message);
+              if (res.status === 202) {
+                switch (res.data.message) {
+                  case 'ALREADY_IN':
+                    toast.info('Bạn đã tham gia lớp học');
+                    setAlreadyIn(true);
+                    break;
+                  case 'INVALID_INVITE_CODE':
+                    setInvalidCode(true);
+                    break;
+                  default:
+                    toast.warning(res.data.message);
+                }
+              }
             }
           });
         });
@@ -40,16 +50,16 @@ function TeacherConfirmPage() {
 
     if (alreadyIn) {
       const redirURL = '/course/' + id + '/info';
-      return <Navigate to={redirURL} />
+      return (<Navigate to={redirURL} />);
     }
 
-    const paperStyle={ width:'50%', margin:"30px auto", paddingBottom: '30px' };
+    if (invalidCode) {
+      return <InvalidCode />
+    }
 
     return (
-        <Paper elevation={10} style={paperStyle}>
-            <ConfirmDialog />
-        </Paper>
+      <ConfirmDialog code={query.get('code')} />
     );
 }
 
-export default TeacherConfirmPage;
+export default StudentConfirmPage;
