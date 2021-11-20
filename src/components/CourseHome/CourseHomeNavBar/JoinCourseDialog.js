@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { joinCourse } from "../../../services/course";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
   const navigate = useNavigate();
@@ -27,7 +28,12 @@ export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
 
     joinCourse(form["code"].value)
       .then((res) => {
-        navigate("/course/" + res.data.payload._id + "/info");
+        console.log(res.status === 202);
+        if (res.status === 200) {
+          navigate("/course/" + res.data.payload._id + "/info");
+        } else if (res.status === 202) {
+          toast.warn(res.data.message);
+        }
       })
       .catch((e) => {
         if (e.response) {
@@ -44,13 +50,13 @@ export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
   return (
     <Dialog open={openDialog} onClose={handleClose}>
       <form ref={formRef} action="/" method="POST" onSubmit={handleSubmit}>
-        <DialogTitle>Create class</DialogTitle>
+        <DialogTitle>Tham gia lớp</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="code"
-            label="Code (required)"
+            label="Mã (không bỏ trống)"
             type="text"
             fullWidth
             variant="standard"
@@ -58,9 +64,9 @@ export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Huỷ bỏ</Button>
           <Button type="submit" onClick={handleSubmit}>
-            Join
+            Vào
           </Button>
         </DialogActions>
       </form>

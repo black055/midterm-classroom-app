@@ -18,7 +18,7 @@ function AccountInfo() {
         </div>
         <div className="name">
           <h3>{userName}</h3>
-          <h5>Your personal account</h5>
+          <h5>Tài khoản cá nhân</h5>
         </div>
       </div>
       <Button
@@ -34,7 +34,7 @@ function AccountInfo() {
         }}
       >
         <Link to="/" style={{ textDecoration: "none", color: "#0984e3" }}>
-          Go to your class list
+          Trở về trang chủ
         </Link>
       </Button>
     </div>

@@ -41,7 +41,7 @@ export default function FormDialog({ openDialog, handleDialogClose }) {
             autoFocus
             margin="dense"
             id="name"
-            label="Class name (required)"
+            label="Tên lớp (không bỏ trống)"
             type="text"
             fullWidth
             variant="standard"
@@ -50,18 +50,18 @@ export default function FormDialog({ openDialog, handleDialogClose }) {
           <TextField
             margin="dense"
             id="briefName"
-            label="Section"
+            label="Chủ đề"
             type="text"
             fullWidth
             variant="standard"
             name="briefName"
           />
-          <TextField margin="dense" id="details" label="Details" type="text" fullWidth variant="standard" name="details" />
+          <TextField margin="dense" id="details" label="Chi tiết" type="text" fullWidth variant="standard" name="details" />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Huỷ bỏ</Button>
           <Button type="submit" onClick={handleSubmit}>
-            Create
+            Tạo
           </Button>
         </DialogActions>
       </form>

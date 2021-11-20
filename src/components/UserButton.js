@@ -34,8 +34,7 @@ export default function UserButton() {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleUserMenu}
-        color="inherit"
-      >
+        color="inherit">
         <AccountCircle />
       </IconButton>
       <Menu
@@ -51,17 +50,15 @@ export default function UserButton() {
           horizontal: "right",
         }}
         open={Boolean(userAnchorEl)}
-        onClose={handleUserClose}
-      >
+        onClose={handleUserClose}>
         <MenuItem
           onClick={() => {
             navigate("/user/u/profile");
             handleUserClose();
-          }}
-        >
-          Profile
+          }}>
+          Thông tin
         </MenuItem>
-        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+        <MenuItem onClick={handleLogout}>Thoát</MenuItem>
       </Menu>
     </Box>
   );

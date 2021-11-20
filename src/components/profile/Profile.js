@@ -70,7 +70,7 @@ function Profile({ info }) {
                   disabled={statusID}
                   variant="outlined"
                   name="studentID"
-                  label="Student ID"
+                  label="ID Sinh viên"
                   color="primary"
                   value={studentID}
                   onChange={(e) => {
@@ -78,7 +78,7 @@ function Profile({ info }) {
                   }}
                   fullWidth
                   margin="dense"
-                  helperText="Your ID help you to view your grades"
+                  helperText="ID Sinh viên duy nhất của bạn"
                 />
                 <TextField
                   disabled
@@ -93,7 +93,7 @@ function Profile({ info }) {
                 <TextField
                   variant="outlined"
                   name="firstname"
-                  label="First Name"
+                  label="Họ"
                   color="primary"
                   fullWidth
                   margin="dense"
@@ -105,7 +105,7 @@ function Profile({ info }) {
                 <TextField
                   variant="outlined"
                   name="lastname"
-                  label="Last Name"
+                  label="Tên"
                   color="primary"
                   fullWidth
                   margin="dense"
@@ -117,7 +117,7 @@ function Profile({ info }) {
                 <TextField
                   variant="outlined"
                   name="gender"
-                  label="Gender"
+                  label="Giới tính"
                   color="primary"
                   fullWidth
                   margin="dense"
@@ -146,7 +146,7 @@ function Profile({ info }) {
                     }}
                   >
                     <span className="btn-create-class__context">
-                      Update profile
+                      Cập nhật
                     </span>
                   </Button>
                   <Snackbar

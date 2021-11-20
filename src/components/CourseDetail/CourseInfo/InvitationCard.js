@@ -74,13 +74,13 @@ export default function InvitationCard({ course }) {
         <Grid item xs={12}>
         
           <Typography variant="h4" color="primary">
-            Invite someone to join this class
+            Mời người tham dự lớp học
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <form onSubmit={handleSubmitTeacher(handleInviteTeacher)}>
             <Typography variant="h5" color="secondary">
-              Invite a teacher assistant
+              Mời giáo viên hỗ trợ
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <TextField
@@ -101,7 +101,7 @@ export default function InvitationCard({ course }) {
         <Grid item xs={12}>
           <form onSubmit={handleSubmitStudent(handleInviteStudent)}>
             <Typography variant="h5" color="secondary">
-              Invite a student
+              Mời học sinh
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               

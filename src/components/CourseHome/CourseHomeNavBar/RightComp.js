@@ -53,8 +53,8 @@ export default function RightComp() {
         }}
         open={Boolean(classAnchorEl)}
         onClose={handleClassClose}>
-        <MenuItem onClick={handleJoinClass}>Join Class</MenuItem>
-        <MenuItem onClick={handleCreateClass}>Create Class</MenuItem>
+        <MenuItem onClick={handleJoinClass}>Tham gia</MenuItem>
+        <MenuItem onClick={handleCreateClass}>Tạo mới</MenuItem>
       </Menu>
 
       <UserButton />

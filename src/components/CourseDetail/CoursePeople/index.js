@@ -18,14 +18,14 @@ export default function CoursePeople() {
       className={classes.root}>
       <Grid item xs={12}>
         <Typography color="primary" variant="h4" sx={{ borderBottom: "1px solid #000" }}>
-          Teacher
+          Giáo viên
         </Typography>
         <TeacherList teachers={teachers} />
       </Grid>
 
       <Grid item xs={12}>
         <Typography color="primary" variant="h4" sx={{ borderBottom: "1px solid #000" }}>
-          Student
+          Sinh viên
         </Typography>
         <StudentList students={students} />
       </Grid>

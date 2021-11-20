@@ -9,7 +9,7 @@ function NavSidebar({ choose }) {
   return (
     <nav aria-label="secondary mailbox folders" className="profile-nav">
       <ListItem sx={{ fontSize: 18, fontWeight: 650 }}>
-        Account settings
+        Cài đặt tài khoản
       </ListItem>
       <Divider />
       <List>
@@ -19,7 +19,7 @@ function NavSidebar({ choose }) {
               to="/user/u/profile"
               style={{ textDecoration: "none", color: "black" }}
             >
-              Profile
+              Thông tin chung
             </Link>
           </ListItemButton>
         </ListItem>
@@ -30,7 +30,7 @@ function NavSidebar({ choose }) {
               to="/user/u/password"
               style={{ textDecoration: "none", color: "black" }}
             >
-              Change Password
+              Đổi mật khẩu
             </Link>
           </ListItemButton>
         </ListItem>

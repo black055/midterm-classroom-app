@@ -9,13 +9,13 @@ export default function MidComp() {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <NavLink end to="info" className={classes.navLink}>
-        <Button color="inherit">Info</Button>
+        <Button color="inherit">Chi tiết</Button>
       </NavLink>
       {/* <NavLink end to="grades" className={classes.navLink}>
         <Button color="inherit">Grades</Button>
       </NavLink> */}
       <NavLink end to="people" className={classes.navLink}>
-        <Button color="inherit">People</Button>
+        <Button color="inherit">Mọi người</Button>
       </NavLink>
     </Box>
   );

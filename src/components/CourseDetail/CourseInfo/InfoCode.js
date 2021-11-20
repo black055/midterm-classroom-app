@@ -7,7 +7,7 @@ export default function CodeCard({ code }) {
     <Card>
       <Box sx={{ width: "90%", mx: "auto" }}>
         <Typography variant="h4" color="primary">
-          Code
+          Mã
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Typography variant="h6">{code}</Typography>

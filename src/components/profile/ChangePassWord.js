@@ -70,7 +70,7 @@ function ChangePassWord() {
               <DialogContent>
                 <TextField
                   id="outlined-password-input"
-                  label="Current password"
+                  label="Mật khẩu hiện tại"
                   type="password"
                   name="currentPassword"
                   autoComplete="current-password"
@@ -82,7 +82,7 @@ function ChangePassWord() {
                   }}
                 />
                 <TextField
-                  label="New password"
+                  label="Mật khẩu mới"
                   value={newPass}
                   margin="dense"
                   fullWidth
@@ -93,7 +93,7 @@ function ChangePassWord() {
                   }}
                 />
                 <TextField
-                  label="Confirm new password"
+                  label="Xác nhận mật khẩu mới"
                   value={confirmNewPass}
                   margin="dense"
                   fullWidth
@@ -116,7 +116,7 @@ function ChangePassWord() {
                     }}
                   >
                     <span className="btn-create-class__context">
-                      Update password
+                      Cập nhật
                     </span>
                   </Button>
                   <Snackbar
