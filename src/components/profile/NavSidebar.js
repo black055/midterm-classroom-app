@@ -12,9 +12,13 @@ function NavSidebar({ choose }) {
         Cài đặt tài khoản
       </ListItem>
       <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton selected={choose === "profile"}>
+      <List classes={{ selected: { backgroundColor: "red" } }}>
+        <ListItem
+          disablePadding
+          selected={choose === "profile"}
+          classes={{ selected: { backgroundColor: "red" } }}
+        >
+          <ListItemButton>
             <Link
               to="/user/u/profile"
               style={{ textDecoration: "none", color: "black" }}
@@ -24,8 +28,8 @@ function NavSidebar({ choose }) {
           </ListItemButton>
         </ListItem>
         <Divider />
-        <ListItem disablePadding>
-          <ListItemButton selected={choose === "password"}>
+        <ListItem disablePadding selected={choose === "password"}>
+          <ListItemButton>
             <Link
               to="/user/u/password"
               style={{ textDecoration: "none", color: "black" }}

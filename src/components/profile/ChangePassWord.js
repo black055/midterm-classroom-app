@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
@@ -66,6 +67,9 @@ function ChangePassWord() {
         <div className="container-profile__main">
           <NavSidebar choose="password" />
           <div className="form">
+            <Typography variant="h6" sx={{ marginTop: 1, marginLeft: 2.5 }}>
+              Chỉnh sửa mật khẩu:
+            </Typography>
             <form method="post" className="update-password">
               <DialogContent>
                 <TextField
@@ -75,7 +79,7 @@ function ChangePassWord() {
                   name="currentPassword"
                   autoComplete="current-password"
                   value={oldPass}
-                  margin="dense"
+                  margin="normal"
                   fullWidth
                   onChange={(e) => {
                     setOldPass(e.target.value);
@@ -84,7 +88,7 @@ function ChangePassWord() {
                 <TextField
                   label="Mật khẩu mới"
                   value={newPass}
-                  margin="dense"
+                  margin="normal"
                   fullWidth
                   type="password"
                   name="newPassword"
@@ -95,7 +99,7 @@ function ChangePassWord() {
                 <TextField
                   label="Xác nhận mật khẩu mới"
                   value={confirmNewPass}
-                  margin="dense"
+                  margin="normal"
                   fullWidth
                   type="password"
                   name="confirmPassword"
@@ -115,9 +119,7 @@ function ChangePassWord() {
                       ":hover": { backgroundColor: "#0abde3" },
                     }}
                   >
-                    <span className="btn-create-class__context">
-                      Cập nhật
-                    </span>
+                    <span className="btn-create-class__context">Cập nhật</span>
                   </Button>
                   <Snackbar
                     open={open}

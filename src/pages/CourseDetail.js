@@ -43,7 +43,7 @@ export default function CourseDetail() {
 
       <Routes>
         <Route path="/*" element={<Navigate to="/404" />} />
-        <Route path="info" element={<CourseInfo />} />
+        <Route path="info" element={<CourseInfo role={role} />} />
         {/* <Route path="grades" /> */}
         <Route path="people" element={<CoursePeople />} />
         <Route

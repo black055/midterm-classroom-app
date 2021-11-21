@@ -1,4 +1,4 @@
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -7,14 +7,20 @@ function AccountInfo() {
   const user = useSelector((state) => state.user);
   const userName =
     user.firstname || user.lastname
-      ? user.firstname + user.lastname
+      ? user.firstname + " " + user.lastname
       : user.email;
-
+  const color = () => {
+    return {
+      backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+    };
+  };
   return (
     <div className="container-profile__header">
-      <div className="profile-avtar">
+      <div className="profile-avatar">
         <div className="avatar">
-          <AccountCircle sx={{ fontSize: 60 }} />
+          <Avatar style={color()} sx={{ width: 50, height: 50 }}>
+            {userName.split(" ").map((s) => s[0])}
+          </Avatar>
         </div>
         <div className="name">
           <h3>{userName}</h3>
@@ -23,17 +29,18 @@ function AccountInfo() {
       </div>
       <Button
         variant="outlined"
-        className="back-btn"
         sx={{
-          height: 25,
+          height: 30,
           width: 165,
           textTransform: "none",
           position: "absolute",
-          top: 50,
+          top: 60,
           right: 20,
+          backgroundColor: "#3498db",
+          ":hover": { backgroundColor: "#0abde3" },
         }}
       >
-        <Link to="/" style={{ textDecoration: "none", color: "#0984e3" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "#ecf0f1" }}>
           Trở về trang chủ
         </Link>
       </Button>

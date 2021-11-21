@@ -1,4 +1,4 @@
-import { MenuItem } from "@mui/material";
+import { MenuItem, Typography } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
@@ -63,6 +63,9 @@ function Profile({ info }) {
         <div className="container-profile__main">
           <NavSidebar choose="profile" />
           <div className="form">
+            <Typography variant="h6" sx={{ marginTop: 1, marginLeft: 2.5 }}>
+              Thông tin cá nhân:
+            </Typography>
             <form method="post" className="update-profile">
               <DialogContent>
                 <TextField
@@ -77,7 +80,7 @@ function Profile({ info }) {
                     setStudentID(e.target.value);
                   }}
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   helperText="ID Sinh viên duy nhất của bạn"
                 />
                 <TextField
@@ -87,7 +90,7 @@ function Profile({ info }) {
                   label="Email"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={info.email}
                 />
                 <TextField
@@ -108,7 +111,7 @@ function Profile({ info }) {
                   label="Tên"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
@@ -120,7 +123,7 @@ function Profile({ info }) {
                   label="Giới tính"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={genderUser}
                   select
                   onChange={(e) => {
@@ -145,9 +148,7 @@ function Profile({ info }) {
                       ":hover": { backgroundColor: "#0abde3" },
                     }}
                   >
-                    <span className="btn-create-class__context">
-                      Cập nhật
-                    </span>
+                    <span className="btn-create-class__context">Cập nhật</span>
                   </Button>
                   <Snackbar
                     open={open}
