@@ -1,40 +1,48 @@
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Grid,
+  Paper,
+} from "@mui/material";
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 import StudentList from "./StudentList";
 import TeacherList from "./TeacherList";
-import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
 
 export default function CoursePeople() {
-  const classes = useStyles();
   const { teachers, students } = useSelector((state) => state.course.item);
-  
+  const course = useSelector((state) => state.course.item);
+  const paperStyle = {
+    width: "60%",
+    margin: "30px auto",
+    paddingBottom: "30px",
+  };
   return (
-    <Grid
-      container
-      rowSpacing={3}
-      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      width={{ sm: "80%", md: "66.7%" }}
-      className={classes.root}>
-      <Grid item xs={12}>
-        <Typography color="primary" variant="h4" sx={{ borderBottom: "1px solid #000" }}>
-          Giáo viên
-        </Typography>
-        <TeacherList teachers={teachers} />
+    <Paper elevation={10} style={paperStyle}>
+      <Grid align="center">
+        <Grid item xs={11} align="start" sx={{ paddingTop: "20px" }}>
+          <Card>
+            <CardHeader
+              sx={{ backgroundColor: "#f6f2f7", textAlign: "center" }}
+              title={
+                <strong>
+                  [{course.briefName}] {course.name}
+                </strong>
+              }
+              subheader={
+                "Người tạo lớp: " + (course.owner ? course.owner.name : "")
+              }
+            />
+            <Divider></Divider>
+            <CardContent>
+              <TeacherList teachers={teachers} owner={course.owner} />
+              <StudentList students={students} />
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
-
-      <Grid item xs={12}>
-        <Typography color="primary" variant="h4" sx={{ borderBottom: "1px solid #000" }}>
-          Sinh viên
-        </Typography>
-        <StudentList students={students} />
-      </Grid>
-    </Grid>
+    </Paper>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  root: {
-    margin: "0 auto",
-  },
-}));

@@ -1,23 +1,30 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import CourseDetailNavBar from "../components/CourseDetail/CourseDetailNavBar/";
-import { getOneCourse } from "../services/course";
 import CourseInfo from "../components/CourseDetail/CourseInfo/";
 import CoursePeople from "../components/CourseDetail/CoursePeople/";
-import { toast } from "react-toastify";
+import CourseSetting from "../components/CourseDetail/CourseSetting";
+import { getOneCourse } from "../services/course";
 
 export default function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { name } = useSelector((state) => state.course.item);
+  const { name, details, briefName } = useSelector(
+    (state) => state.course.item
+  );
+  const role = useSelector((state) => state.course.role);
+  // console.log(role);
 
   useEffect(() => {
     dispatch(async (dispatch) => {
       return getOneCourse(id).then((res) => {
-        console.log(res);
         if (res.status === 200) {
-          dispatch({ type: "COURSE_FETCHED", payload: res.data.payload });
+          dispatch({
+            type: "COURSE_FETCHED",
+            payload: { course: res.data.payload, role: res.data.role },
+          });
         }
         if (res.status === 202) {
           toast.warning(res.data.message);
@@ -32,13 +39,25 @@ export default function CourseDetail() {
 
   return (
     <div>
-      <CourseDetailNavBar courseName={name} />
+      <CourseDetailNavBar courseName={name} role={role} />
 
       <Routes>
         <Route path="/*" element={<Navigate to="/404" />} />
         <Route path="info" element={<CourseInfo />} />
         {/* <Route path="grades" /> */}
         <Route path="people" element={<CoursePeople />} />
+        <Route
+          path="setting"
+          element={
+            <CourseSetting
+              role={role}
+              name={name}
+              details={details}
+              briefName={briefName}
+              id={id}
+            />
+          }
+        />
       </Routes>
     </div>
   );

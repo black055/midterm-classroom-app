@@ -1,9 +1,9 @@
 import { Box, Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 
-export default function MidComp() {
+export default function MidComp({ role }) {
   const classes = useStyles();
 
   return (
@@ -17,6 +17,11 @@ export default function MidComp() {
       <NavLink end to="people" className={classes.navLink}>
         <Button color="inherit">Mọi người</Button>
       </NavLink>
+      {role && role !== "STUDENT" && (
+        <NavLink end to="setting" className={classes.navLink}>
+          <Button color="inherit">Cài đặt</Button>
+        </NavLink>
+      )}
     </Box>
   );
 }

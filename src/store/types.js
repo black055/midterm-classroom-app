@@ -4,6 +4,7 @@ export const COURSES_INCREMENT = "COURSES_INCREMENT";
 
 export const COURSE_FETCHED = "COURSE_FETCHED";
 export const COURSE_EMPTY = "COURSE_EMPTY";
+export const COURSE_UPDATE = "COURSE_UPDATE";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";

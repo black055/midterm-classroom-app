@@ -1,20 +1,38 @@
+import { Avatar, CardHeader, Divider, Typography } from "@mui/material";
 import React from "react";
-import { Grid, Typography } from "@mui/material";
 
 export default function StudentList({ students }) {
+  const color = () => {
+    return {
+      backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+    };
+  };
   return (
-    <Grid container spacing={{ xs: 1 }}>
-      {students ? (
-        students.map((s, index) => (
-          <Grid item xs={12} key={index}>
-            <Typography variant="h6">{s.name}</Typography>
-          </Grid>
+    <div>
+      <Typography color="text.secondary" display="block" variant="caption">
+        <strong style={{ fontSize: 16, textDecoration: "underline" }}>
+          Danh sách học viên
+        </strong>
+      </Typography>
+      {students && students.length ? (
+        students.map((student, index) => (
+          <div>
+            <CardHeader
+              key={student._id}
+              avatar={
+                <Avatar style={color()}>
+                  {student.name.split(" ").map((s) => s[0])}
+                </Avatar>
+              }
+              title={student.name}
+              subheader={student.email}
+            />
+            {index === students.length - 1 || <Divider />}
+          </div>
         ))
       ) : (
-        <Grid item xs={12}>
-          <Typography variant="h6">Không tồn tại học sinh</Typography>
-        </Grid>
+        <strong>Lớp học không có học viên</strong>
       )}
-    </Grid>
+    </div>
   );
 }

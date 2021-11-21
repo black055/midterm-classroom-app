@@ -3,7 +3,8 @@ import axios from "axios";
 // Gắn token vào header của request
 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
 axios.interceptors.request.use((config) => {
-  config.headers["Authorization"] = "Bearer " + JSON.parse(localStorage.getItem("token"));
+  config.headers["Authorization"] =
+    "Bearer " + JSON.parse(localStorage.getItem("token"));
   return config;
 });
 const API_URL = "http://localhost:3000/course/";
@@ -17,9 +18,9 @@ export function getOneCourse(id) {
 }
 
 export function getPublicInfoCourse(id, inviteCode, teacherInvite = false) {
-  const url = teacherInvite ? 
-    API_URL + 'public/' + id + '?inviteCode=' + inviteCode : 
-    API_URL + 'public/' + id + '?code=' + inviteCode
+  const url = teacherInvite
+    ? API_URL + "public/" + id + "?inviteCode=" + inviteCode
+    : API_URL + "public/" + id + "?code=" + inviteCode;
   return axios.get(url);
 }
 
@@ -37,4 +38,12 @@ export function inviteTeacher(email, course) {
 
 export function inviteStudent(email, course) {
   return axios.post(API_URL + "invite/student", { email, course });
+}
+
+export function updateOneCourse(id, name, details, briefName) {
+  return axios.put(API_URL + id, { name, details, briefName });
+}
+
+export function deleteOneCourse(id) {
+  return axios.delete(API_URL + id);
 }

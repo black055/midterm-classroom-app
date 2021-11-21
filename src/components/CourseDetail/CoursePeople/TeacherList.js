@@ -1,20 +1,61 @@
+import { Avatar, CardHeader, Divider, Grid, Typography } from "@mui/material";
 import React from "react";
-import { Grid, Typography } from "@mui/material";
 
-export default function TeacherList({ teachers }) {
+export default function TeacherList({ teachers, owner }) {
+  const color = () => {
+    return {
+      backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+    };
+  };
+
   return (
-    <Grid container spacing={{ xs: 1 }}>
-      {teachers ? (
-        teachers.map((t, index) => (
-          <Grid item xs={12} key={index}>
-            <Typography variant="h6">{t.name}</Typography>
+    <div>
+      <Typography color="text.secondary" display="block" variant="caption">
+        <strong style={{ fontSize: 16, textDecoration: "underline" }}>
+          Danh sách giáo viên
+        </strong>
+      </Typography>
+      {owner && (
+        <div className="owner">
+          <Grid container spacing={2}>
+            <Grid item xs={4.5}>
+              <CardHeader
+                key={owner._id}
+                avatar={
+                  <Avatar style={color()}>
+                    {owner.name.split(" ").map((s) => s[0])}
+                  </Avatar>
+                }
+                title={owner.name}
+                subheader={owner.email}
+              />
+            </Grid>
+            <Grid item xs={4} sx={{ marginTop: 3.5, fontSize: 12 }}>
+              (Sở hữu)
+            </Grid>
           </Grid>
+          <Divider />
+        </div>
+      )}
+      {teachers && teachers.length ? (
+        teachers.map((teacher, index) => (
+          <div className="teacher">
+            <CardHeader
+              key={teacher._id}
+              avatar={
+                <Avatar style={color()}>
+                  {teacher.name.split(" ").map((s) => s[0])}
+                </Avatar>
+              }
+              title={teacher.name}
+              subheader={teacher.email}
+            />
+            {index === teachers.length - 1 || <Divider />}
+          </div>
         ))
       ) : (
-        <Grid item xs={12}>
-          <Typography variant="h6">Không tồn tại giáo viên</Typography>
-        </Grid>
+        <strong>Lớp học không có giáo viên</strong>
       )}
-    </Grid>
+    </div>
   );
 }

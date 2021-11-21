@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { Box } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import React, { useState } from "react";
 
 export default function RightComp() {
   const [userAnchorEl, setUserAnchorEl] = useState(null);
@@ -24,7 +24,8 @@ export default function RightComp() {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleUserMenu}
-        color="inherit">
+        color="inherit"
+      >
         <AccountCircle />
       </IconButton>
       <Menu
@@ -40,7 +41,8 @@ export default function RightComp() {
           horizontal: "right",
         }}
         open={Boolean(userAnchorEl)}
-        onClose={handleUserClose}>
+        onClose={handleUserClose}
+      >
         <MenuItem onClick={handleUserClose}>Profile</MenuItem>
         <MenuItem onClick={handleUserClose}>Log Out</MenuItem>
       </Menu>
