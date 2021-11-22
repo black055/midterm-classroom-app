@@ -44,7 +44,7 @@ function EditInfoCourse({ id, name, details, briefName }) {
         setContentAlert("Cập nhật thành công!");
         dispatch({
           type: "COURSE_UPDATE",
-          payload: { course: res.data.payload, role: res.data.role },
+          payload: res.data.payload,
         });
       })
       .catch((error) => {

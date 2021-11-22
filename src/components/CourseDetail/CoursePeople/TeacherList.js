@@ -37,7 +37,8 @@ export default function TeacherList({ teachers, owner }) {
           <Divider />
         </div>
       )}
-      {teachers && teachers.length ? (
+      {teachers &&
+        teachers.length > 0 &&
         teachers.map((teacher, index) => (
           <div className="teacher">
             <CardHeader
@@ -52,10 +53,7 @@ export default function TeacherList({ teachers, owner }) {
             />
             {index === teachers.length - 1 || <Divider />}
           </div>
-        ))
-      ) : (
-        <strong>Lớp học không có giáo viên</strong>
-      )}
+        ))}
     </div>
   );
 }

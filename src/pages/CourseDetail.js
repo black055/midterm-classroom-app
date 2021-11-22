@@ -11,11 +11,10 @@ import { getOneCourse } from "../services/course";
 export default function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { name, details, briefName } = useSelector(
+  const { name, role, details, briefName } = useSelector(
     (state) => state.course.item
   );
-  const role = useSelector((state) => state.course.role);
-  // console.log(role);
+  console.log(role);
 
   useEffect(() => {
     dispatch(async (dispatch) => {
@@ -23,7 +22,7 @@ export default function CourseDetail() {
         if (res.status === 200) {
           dispatch({
             type: "COURSE_FETCHED",
-            payload: { course: res.data.payload, role: res.data.role },
+            payload: res.data.payload,
           });
         }
         if (res.status === 202) {

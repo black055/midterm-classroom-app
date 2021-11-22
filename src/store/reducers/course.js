@@ -1,6 +1,6 @@
 import { COURSE_EMPTY, COURSE_FETCHED, COURSE_UPDATE } from "../types";
 
-const initialState = { item: {}, role: "" };
+const initialState = { item: {} };
 
 export default function reducer(state = initialState, action) {
   const { type, payload } = action;
@@ -10,21 +10,21 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         item: {},
-        role: "",
       };
     case COURSE_FETCHED:
-      // console.log(type);
-      // console.log(payload.role);
       return {
         ...state,
-        item: payload.course,
-        role: payload.role,
+        item: payload,
       };
     case COURSE_UPDATE:
       return {
         ...state,
-        item: payload.course,
-        role: payload.role,
+        item: {
+          ...state.item,
+          name: payload.name,
+          details: payload.details,
+          briefName: payload.briefName,
+        },
       };
     default:
       return state;
