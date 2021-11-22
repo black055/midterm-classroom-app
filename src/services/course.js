@@ -47,3 +47,7 @@ export function updateOneCourse(id, name, details, briefName) {
 export function deleteOneCourse(id) {
   return axios.delete(API_URL + id);
 }
+
+export function leaveCourse(courseId) {
+  return axios.post(API_URL + "leaveCourse", { courseId });
+}

@@ -1,4 +1,4 @@
-import { COURSES_EMPTY, COURSES_FETCHED, COURSES_INCREMENT } from "../types";
+import { COURSES_EMPTY, COURSES_FETCHED, COURSES_INCREMENT, LEAVE_COURSE } from "../types";
 
 const initialState = { items: [] };
 
@@ -20,6 +20,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         items: state.items.concat(payload),
+      };
+    case LEAVE_COURSE:
+      return {
+        ...state,
+        items: state.items.filter(item => item._id !== payload._id),
       };
     default:
       return state;

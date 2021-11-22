@@ -2,29 +2,29 @@ import {
   AssignmentIndOutlined as PeopleOutlineIcon,
   ContentCopy as ContentCopyIcon,
   ExpandMore as ExpandMoreIcon,
-  MoreVert as MoreVertIcon,
 } from "@mui/icons-material";
-import {
-  Avatar,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Collapse,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Popover,
-  styled,
-  Tooltip,
+import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, 
+  CardMedia, Collapse, Grid, IconButton, styled, Tooltip,
 } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+import TeacherAction from './TeacherAction';
+import StudentAction from './StudentAction';
+import { toast } from "react-toastify";
+
+const stringToColour = function(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let colour = '#';
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xFF;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+  return colour;
+}
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,83 +37,44 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function MultiActionAreaCard({
-  id,
-  name,
-  teacherName = "Tên giáo viên",
-  briefName,
-  details,
-}) {
+export default function CourseCard({ id, name, owner, briefName, details, role, code = null }) {
   const navigate = useNavigate();
   const bgcolor = {
-    backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+    backgroundColor: stringToColour(name),
   };
   const [expanded, setExpanded] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const idPopover = open ? "simple-popover" : undefined;
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handlePopoverClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const editCourse = () => {
-    //handle
-    handleClose();
-  };
-
-  const deleteCourse = () => {
-    //handle
-    handleClose();
-  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const copyCode = () => {
+    toast.success('Đã sao chép mã mời vào bộ nhớ!');
+    navigator.clipboard.writeText(code);
+  }
+  
+  let headerAction;
+  switch (role) {
+    case 'OWNER':
+      headerAction = (<TeacherAction id={id} owner={true} />);
+      break;
+    case 'TEACHER':
+      headerAction = (<TeacherAction id={id} />);
+      break;
+    case 'STUDENT':
+      headerAction = (<StudentAction id={id} />);
+      break;
+    default:
+  }
 
   return (
     <Grid item xs={4} key={id}>
       <Card className="course-card">
         <CardHeader
           avatar={<Avatar style={bgcolor}>{briefName.slice(0, 2)}</Avatar>}
-          action={
-            <div>
-              <IconButton aria-label="settings" onClick={handlePopoverClick}>
-                <MoreVertIcon />
-              </IconButton>
-              <Popover
-                id={idPopover}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-              >
-                <List sx={{ p: 1 }}>
-                  <ListItem disablePadding>
-                    <ListItemButton onClick={editCourse}>
-                      <ListItemText primary="Sửa" />
-                    </ListItemButton>
-                  </ListItem>
-                  {/* if owner can delete */}
-                  <ListItem disablePadding>
-                    <ListItemButton onClick={deleteCourse}>
-                      <ListItemText primary="Xóa" />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </Popover>
-            </div>
-          }
-          title={
-            <strong>
-              [{briefName}] {name}
-            </strong>
-          }
-          subheader={teacherName}
+          action={ headerAction }
+          title={ <strong> [{briefName}] {name} </strong> }
+          subheader={'Người tạo: ' + owner.name + (role === 'OWNER' ? ' (bạn)' : '')}
         />
         <CardActionArea onClick={() => navigate("/course/" + id + "/info")}>
           <CardMedia
@@ -123,13 +84,16 @@ export default function MultiActionAreaCard({
           />
         </CardActionArea>
         <CardActions disableSpacing>
-          <Tooltip title="Sao chép link mời">
-            <IconButton aria-label="copy invite link">
-              <ContentCopyIcon />
-            </IconButton>
-          </Tooltip>
+          {
+            (role === 'OWNER' || role === 'TEACHER') &&
+            <Tooltip title="Sao chép mã lớp">
+              <IconButton aria-label="copy invite code" onClick={copyCode}>
+                <ContentCopyIcon />
+              </IconButton>
+            </Tooltip>
+          }
           <Tooltip title="Danh sách giáo viên và học sinh">
-            <IconButton aria-label="user list">
+            <IconButton aria-label="user list" onClick={() => navigate("/course/" + id + "/people")} >
               <PeopleOutlineIcon />
             </IconButton>
           </Tooltip>

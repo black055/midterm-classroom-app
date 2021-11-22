@@ -10,16 +10,22 @@ export default function CourseList({ courses }) {
         {courses &&
           courses.map((item) => (
             <Grid item
-              xs={4}
-              sm={4}
-              md={4}
+              xs={4} sm={4} md={4}
               key={item._id}
               container
               direction="row"
               alignItems="baseline"
               justifyContent="center"
               sx={{ my: "0.8rem" }}>
-              <Card id={item._id} name={item.name} teacherName={item.teacherName} briefName={item.briefName} details={item.details} />
+              <Card
+                id={item._id}
+                name={item.name}
+                owner={item.owner}
+                briefName={item.briefName}
+                details={item.details}
+                role={item.role}
+                code={item.code}
+              />
             </Grid>
           ))}
       </Grid>

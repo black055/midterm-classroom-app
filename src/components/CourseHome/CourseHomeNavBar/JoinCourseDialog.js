@@ -30,6 +30,7 @@ export default function JoinCourseDialog({ openDialog, handleDialogClose }) {
       .then((res) => {
         console.log(res.status === 202);
         if (res.status === 200) {
+          toast.success('Tham gia lớp học thành công!');
           navigate("/course/" + res.data.payload._id + "/info");
         } else if (res.status === 202) {
           toast.warn(res.data.message);
