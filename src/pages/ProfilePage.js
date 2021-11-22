@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import ChangePassWord from "../components/profile/ChangePassWord";
-import Profile from "../components/profile/Profile";
+import ChangePassWord from "../components/Profile/ChangePassWord";
+import Profile from "../components/Profile/Profile";
 import { getUser } from "../services/user";
 
 function ProfilePage() {
