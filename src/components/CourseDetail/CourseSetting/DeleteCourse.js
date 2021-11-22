@@ -1,10 +1,12 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
   DialogTitle,
   Grid,
   Paper,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -19,8 +21,10 @@ function DeleteCourse({ id }) {
     paddingBottom: "10px",
     paddingTop: "20px",
   };
-
+  const [notification, setNotification] = useState("info");
+  const [contentAlert, setContentAlert] = useState("Vui lòng chờ!");
   const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,9 +34,28 @@ function DeleteCourse({ id }) {
     setOpen(false);
   };
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
   const deleteCourse = () => {
-    deleteOneCourse(id).then((res) => {});
-    navigate("/");
+    deleteOneCourse(id)
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          // console.log(error.response.data.message);
+          setNotification("error");
+          setContentAlert("Bạn không có quyền xóa!");
+          setOpenAlert(true);
+          setOpen(false);
+        }
+      });
   };
   return (
     <Paper
@@ -98,6 +121,19 @@ function DeleteCourse({ id }) {
             </Button>
           </DialogActions>
         </Dialog>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={3000}
+          onClose={handleCloseAlert}
+        >
+          <Alert
+            onClose={handleCloseAlert}
+            severity={notification}
+            sx={{ width: "100%" }}
+          >
+            {contentAlert}
+          </Alert>
+        </Snackbar>
       </Grid>
     </Paper>
   );

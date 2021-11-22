@@ -4,7 +4,6 @@ import DeleteCourse from "./DeleteCourse";
 import EditInfoCourse from "./EditInfoCourse";
 
 export default function Settings({ role, name, details, briefName, id }) {
-  console.log(role);
   return (
     <Box sx={{ display: "block", alignItems: "center" }}>
       <EditInfoCourse

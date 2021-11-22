@@ -1,4 +1,4 @@
-import { MenuItem } from "@mui/material";
+import { MenuItem, Typography } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
@@ -19,7 +19,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Profile({ info }) {
   const [open, setOpen] = useState(false);
-
+  const [notification, setNotification] = useState("info");
+  const [contentAlert, setContentAlert] = useState("Vui lòng chờ!");
   const dispatch = useDispatch();
 
   const [studentID, setStudentID] = useState("");
@@ -50,10 +51,17 @@ function Profile({ info }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpen(true);
+    if (statusID === false) {
+      setNotification("error");
+      setContentAlert("ID đã tồn tại!");
+      setStudentID("");
+    }
     updateProfile(studentID, firstName, lastName, genderUser).then((res) => {
+      setNotification("success");
+      setContentAlert("Cập nhật thành công!");
       dispatch({ type: "USER_UPDATE", payload: res.data });
     });
+    setOpen(true);
   };
   return (
     <>
@@ -63,6 +71,9 @@ function Profile({ info }) {
         <div className="container-profile__main">
           <NavSidebar choose="profile" />
           <div className="form">
+            <Typography variant="h6" sx={{ marginTop: 1, marginLeft: 2.5 }}>
+              Thông tin cá nhân:
+            </Typography>
             <form method="post" className="update-profile">
               <DialogContent>
                 <TextField
@@ -77,7 +88,7 @@ function Profile({ info }) {
                     setStudentID(e.target.value);
                   }}
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   helperText="ID Sinh viên duy nhất của bạn"
                 />
                 <TextField
@@ -87,7 +98,7 @@ function Profile({ info }) {
                   label="Email"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={info.email}
                 />
                 <TextField
@@ -108,7 +119,7 @@ function Profile({ info }) {
                   label="Tên"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
@@ -120,7 +131,7 @@ function Profile({ info }) {
                   label="Giới tính"
                   color="primary"
                   fullWidth
-                  margin="dense"
+                  margin="normal"
                   value={genderUser}
                   select
                   onChange={(e) => {
@@ -145,9 +156,7 @@ function Profile({ info }) {
                       ":hover": { backgroundColor: "#0abde3" },
                     }}
                   >
-                    <span className="btn-create-class__context">
-                      Cập nhật
-                    </span>
+                    <span className="btn-create-class__context">Cập nhật</span>
                   </Button>
                   <Snackbar
                     open={open}
@@ -156,10 +165,10 @@ function Profile({ info }) {
                   >
                     <Alert
                       onClose={handleClose}
-                      severity="success"
+                      severity={notification}
                       sx={{ width: "100%" }}
                     >
-                      Updated Successfully!
+                      {contentAlert}
                     </Alert>
                   </Snackbar>
                 </DialogActions>
