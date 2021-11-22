@@ -18,24 +18,14 @@ function NavSidebar({ choose }) {
           selected={choose === "profile"}
           classes={{ selected: { backgroundColor: "red" } }}
         >
-          <ListItemButton>
-            <Link
-              to="/user/u/profile"
-              style={{ textDecoration: "none", color: "black" }}
-            >
+          <ListItemButton component={Link} to="/user/u/profile" style={{ textDecoration: "none", color: "black" }}>
               Thông tin chung
-            </Link>
           </ListItemButton>
         </ListItem>
         <Divider />
         <ListItem disablePadding selected={choose === "password"}>
-          <ListItemButton>
-            <Link
-              to="/user/u/password"
-              style={{ textDecoration: "none", color: "black" }}
-            >
+          <ListItemButton component={Link} to="/user/u/password" style={{ textDecoration: "none", color: "black" }}>
               Đổi mật khẩu
-            </Link>
           </ListItemButton>
         </ListItem>
       </List>

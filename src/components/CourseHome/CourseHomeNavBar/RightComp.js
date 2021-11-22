@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { IconButton, MenuItem, Menu } from "@mui/material";
+import { IconButton, MenuItem, Menu, Box } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
+import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
 import AddCourseDialog from "./AddCourseDialog";
 import JoinCourseDialog from "./JoinCourseDialog";
 import UserButton from "../../UserButton";
@@ -30,15 +32,18 @@ export default function RightComp() {
 
   return (
     <React.Fragment>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleClassMenu}
-        color="inherit">
-        <AddIcon />
-      </IconButton>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleClassMenu}
+          color="inherit">
+          <AddIcon />
+        </IconButton>
+      </Box>
+      
       <Menu
         id="menu-appbar"
         anchorEl={classAnchorEl}
@@ -53,8 +58,14 @@ export default function RightComp() {
         }}
         open={Boolean(classAnchorEl)}
         onClose={handleClassClose}>
-        <MenuItem onClick={handleJoinClass}>Tham gia</MenuItem>
-        <MenuItem onClick={handleCreateClass}>Tạo mới</MenuItem>
+        <MenuItem onClick={handleJoinClass} sx={{color: 'gray'}}>
+          <CreateNewFolderOutlinedIcon fontSize="small" sx={{marginRight: '10px'}} />
+          Tham gia
+        </MenuItem>
+        <MenuItem onClick={handleCreateClass} sx={{color: 'gray'}}>
+          <FiberNewOutlinedIcon fontSize="small" sx={{color: 'gray', marginRight: '10px'}} />
+          Tạo mới
+        </MenuItem>
       </Menu>
 
       <UserButton />

@@ -35,7 +35,6 @@ export default function InvitationCard({ course }) {
     inviteStudent(data.email, course).then((res) => {
       updateLoadingToast(res.data.message, toastID, e);
     }).catch(err => {
-      console.log(err.response.status);
       const message = (err.response.status === 401) ? err.response.data.message
        : "Có lỗi xảy ra trong quá trình gửi lời mời!";
       toast.update(toastID, {

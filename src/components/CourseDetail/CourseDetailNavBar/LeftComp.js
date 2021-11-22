@@ -12,7 +12,7 @@ export default function LeftComp({ courseName }) {
         </IconButton>
       </Link>
 
-      <Typography variant="h6" component="div" sx={{ flexGrow: 1, width: "7rem" }} noWrap={true}>
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1}} >
         {courseName}
       </Typography>
     </Box>

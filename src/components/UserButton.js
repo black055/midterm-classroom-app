@@ -1,6 +1,8 @@
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import LogoutIcon from "@mui/icons-material/Logout";
+import FaceIcon from "@mui/icons-material/Face";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
@@ -51,14 +53,18 @@ export default function UserButton() {
         }}
         open={Boolean(userAnchorEl)}
         onClose={handleUserClose}>
-        <MenuItem
-          onClick={() => {
+        <MenuItem onClick={() => {
             navigate("/user/u/profile");
             handleUserClose();
-          }}>
-          Thông tin
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>Thoát</MenuItem>
+          }} sx={{color: 'gray'}}>
+            <FaceIcon fontSize="small" sx={{marginRight: '10px'}} />
+            Thông tin
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleLogout} sx={{color: 'gray'}}>
+            <LogoutIcon fontSize="small" sx={{color: 'gray', marginRight: '10px'}} />
+            Đăng xuất
+          </MenuItem>
       </Menu>
     </Box>
   );

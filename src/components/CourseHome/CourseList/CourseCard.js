@@ -54,19 +54,24 @@ export default function CourseCard({ id, name, owner, briefName, details, role, 
   }
   
   let headerAction;
+  let thumbnailURL;
   switch (role) {
     case 'OWNER':
       headerAction = (<TeacherAction id={id} owner={true} />);
+      thumbnailURL = '/static/images/owner-thumbnail.jpg';
       break;
     case 'TEACHER':
       headerAction = (<TeacherAction id={id} />);
+      thumbnailURL = '/static/images/teacher-thumbnail.jpg';
       break;
     case 'STUDENT':
       headerAction = (<StudentAction id={id} />);
+      thumbnailURL = '/static/images/student-thumbnail.jpg';
       break;
     default:
   }
 
+  
   return (
     <Grid item xs={4} key={id}>
       <Card className="course-card">
@@ -80,7 +85,7 @@ export default function CourseCard({ id, name, owner, briefName, details, role, 
           <CardMedia
             component="img"
             height="194"
-            image="https://www.viewsonic.com/library/wp-content/uploads/2021/01/LB0032-696x463.jpg"
+            image={thumbnailURL}
           />
         </CardActionArea>
         <CardActions disableSpacing>
