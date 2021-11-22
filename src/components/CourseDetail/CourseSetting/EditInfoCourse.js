@@ -16,6 +16,8 @@ import { updateOneCourse } from "../../../services/course";
 function EditInfoCourse({ id, name, details, briefName }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [notification, setNotification] = useState("info");
+  const [contentAlert, setContentAlert] = useState("Vui lòng chờ!");
   const [nameCourse, setNameCourse] = useState("");
   const [detailCourse, setDetailCourse] = useState("");
   const [briefNameCourse, setBriefNameCourse] = useState("");
@@ -35,14 +37,25 @@ function EditInfoCourse({ id, name, details, briefName }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateOneCourse(id, nameCourse, detailCourse, briefNameCourse).then(
-      (res) => {
+
+    updateOneCourse(id, nameCourse, detailCourse, briefNameCourse)
+      .then((res) => {
+        setNotification("success");
+        setContentAlert("Cập nhật thành công!");
         dispatch({
           type: "COURSE_UPDATE",
           payload: { course: res.data.payload, role: res.data.role },
         });
-      }
-    );
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          // console.log(error.response.data.message);
+
+          setNotification("error");
+          setContentAlert("Bạn không có quyền cập nhật!");
+        }
+      });
+
     setOpen(true);
   };
 
@@ -120,10 +133,10 @@ function EditInfoCourse({ id, name, details, briefName }) {
               >
                 <Alert
                   onClose={handleClose}
-                  severity="success"
+                  severity={notification}
                   sx={{ width: "100%" }}
                 >
-                  Cập nhật thành công
+                  {contentAlert}
                 </Alert>
               </Snackbar>
             </DialogActions>
