@@ -4,7 +4,7 @@ import {
   ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
 import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, 
-  CardMedia, Collapse, Grid, IconButton, styled, Tooltip,
+  CardMedia, Collapse, Grid, IconButton, styled, Tooltip, Typography
 } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -112,7 +112,15 @@ export default function CourseCard({ id, name, owner, briefName, details, role, 
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>{details}</CardContent>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="div">
+              Thông tin chi tiết
+            </Typography>
+            
+            <Typography variant="body2" color="text.secondary">
+              {details}
+            </Typography>
+          </CardContent>
         </Collapse>
       </Card>
     </Grid>

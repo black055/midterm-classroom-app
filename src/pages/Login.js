@@ -23,7 +23,7 @@ function Login() {
 
   const location = useLocation();
   const { from } = location.state;
-  console.log(from);
+  
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
