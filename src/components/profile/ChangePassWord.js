@@ -39,22 +39,24 @@ function ChangePassWord() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNotification("error");
-    setContentAlert("Please fill in this form!");
+    setNotification("info");
+    setContentAlert("Vui lòng điền đủ thông tin!");
 
-    if (newPass !== confirmNewPass) {
-      //message change fail
-      setNotification("error");
-      setContentAlert("New password does not match!");
-    } else {
-      //message change fail
-      setNotification("error");
-      setContentAlert("Incorrect password!");
-      updatePassword(oldPass, newPass).then((res) => {
-        //message change success
-        setNotification("success");
-        setContentAlert("Updated Successfully!");
-      });
+    if (oldPass || newPass || confirmNewPass) {
+      if (newPass !== confirmNewPass) {
+        //message change fail
+        setNotification("error");
+        setContentAlert("Mật khẩu mới không trùng khớp!");
+      } else if (newPass === "") {
+      } else {
+        setNotification("error");
+        setContentAlert("Sai mật khẩu!");
+        updatePassword(oldPass, newPass).then((res) => {
+          //message change success
+          setNotification("success");
+          setContentAlert("Cập nhật thành công!");
+        });
+      }
     }
     setOpen(true);
     clearState();

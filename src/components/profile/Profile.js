@@ -19,7 +19,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Profile({ info }) {
   const [open, setOpen] = useState(false);
-
+  const [notification, setNotification] = useState("info");
+  const [contentAlert, setContentAlert] = useState("Vui lòng chờ!");
   const dispatch = useDispatch();
 
   const [studentID, setStudentID] = useState("");
@@ -50,10 +51,17 @@ function Profile({ info }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpen(true);
+    if (statusID === false) {
+      setNotification("error");
+      setContentAlert("ID đã tồn tại!");
+      setStudentID("");
+    }
     updateProfile(studentID, firstName, lastName, genderUser).then((res) => {
+      setNotification("success");
+      setContentAlert("Cập nhật thành công!");
       dispatch({ type: "USER_UPDATE", payload: res.data });
     });
+    setOpen(true);
   };
   return (
     <>
@@ -157,10 +165,10 @@ function Profile({ info }) {
                   >
                     <Alert
                       onClose={handleClose}
-                      severity="success"
+                      severity={notification}
                       sx={{ width: "100%" }}
                     >
-                      Updated Successfully!
+                      {contentAlert}
                     </Alert>
                   </Snackbar>
                 </DialogActions>

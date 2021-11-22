@@ -58,7 +58,7 @@ function EditInfoCourse({ id, name, details, briefName }) {
         <Typography variant="h5" gutterBottom sx={{ marginLeft: 3 }}>
           Thông tin lớp học
         </Typography>
-        <form method="post" className="update-profile">
+        <form method="post" className="update-course">
           <DialogContent>
             <TextField
               required
@@ -123,7 +123,7 @@ function EditInfoCourse({ id, name, details, briefName }) {
                   severity="success"
                   sx={{ width: "100%" }}
                 >
-                  Updated Successfully!
+                  Cập nhật thành công
                 </Alert>
               </Snackbar>
             </DialogActions>
