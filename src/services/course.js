@@ -6,6 +6,7 @@ axios.interceptors.request.use((config) => {
   config.headers["Authorization"] = "Bearer " + JSON.parse(localStorage.getItem("token"));
   return config;
 });
+
 //const API_URL = "http://localhost:3000/course/";
 const API_URL = "https://midterm-classroom-api.herokuapp.com/course/";
 

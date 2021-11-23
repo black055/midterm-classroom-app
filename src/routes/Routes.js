@@ -3,7 +3,8 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export function AuthRoute({ loggedIn }) {
   const location = useLocation();
-  const { from } = (location.state) ? location.state : '/';
+  const from = location.state?.from || '/';
+
 
   return loggedIn ? <Navigate to={`${from}`} /> : <Outlet />;
 }

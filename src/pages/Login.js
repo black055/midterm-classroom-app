@@ -22,7 +22,8 @@ function Login() {
   const typoStyle = { marginLeft: "10px" };
 
   const location = useLocation();
-  const { from } = (location.state) ? location.state : '/';
+  const from = location.state?.from || '/';
+
   
   return (
     <Grid>
