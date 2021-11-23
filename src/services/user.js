@@ -7,7 +7,8 @@ axios.interceptors.request.use((config) => {
     "Bearer " + JSON.parse(localStorage.getItem("token"));
   return config;
 });
-const API_URL = "http://localhost:3000/user/";
+//const API_URL = "http://localhost:3000/user/";
+const API_URL = "https://midterm-classroom-api.herokuapp.com/user/";
 
 export function getUser() {
   return axios.get(API_URL);

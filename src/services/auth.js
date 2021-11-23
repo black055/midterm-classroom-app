@@ -1,6 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const API_URL = "http://localhost:3000/auth";
+//const API_URL = "http://localhost:3000/auth";
+const API_URL = "https://midterm-classroom-api.herokuapp.com/auth";
+
 
 export function verifyGoogleToken(tokenId) {
   return (dispatch) => {
@@ -30,7 +32,7 @@ export function login(email, password) {
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.response && err.response.status === 401) {
           toast.warn("Sai email hoặc mật khẩu!");
         } else console.log(err);
       });
@@ -54,7 +56,7 @@ export function register(data) {
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.response && err.response.status === 401) {
           toast.warn(err.response.data.message);
         } else console.log(err);
       });

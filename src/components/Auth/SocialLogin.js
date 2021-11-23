@@ -15,6 +15,7 @@ function SocialLogin() {
     }
 
     const failureGoogleLoginHandler = (response) => {
+        console.log(response);
         toast.warn('Có lỗi khi đăng nhập!');
     }
 
