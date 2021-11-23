@@ -21,7 +21,7 @@ function Register() {
   const typoStyle = { marginLeft: "10px" };
 
   const location = useLocation();
-  const { from } = location.state;
+  const { from } = (location.state) ? location.state : '/';
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
