@@ -32,7 +32,7 @@ export default function RightComp() {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, flexBasis: 0, justifyContent: "end" }}>
         <IconButton
           size="large"
           aria-label="account of current user"

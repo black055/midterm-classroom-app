@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function LeftComp({ courseName }) {
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, flexBasis: 0 }}>
       <Link to="/" style={{ color: "inherit" }}>
         <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           <ArrowBackIosNewIcon />

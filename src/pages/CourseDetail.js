@@ -14,7 +14,6 @@ export default function CourseDetail() {
   const { name, role, details, briefName } = useSelector(
     (state) => state.course.item
   );
-  console.log(role);
 
   useEffect(() => {
     dispatch(async (dispatch) => {

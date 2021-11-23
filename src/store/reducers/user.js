@@ -6,6 +6,7 @@ const initialState = {
   firstname: "",
   lastname: "",
   gender: "",
+  isSocialAcc: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -25,6 +26,7 @@ export default function reducer(state = initialState, action) {
         firstname: payload.firstname,
         lastname: payload.lastname,
         gender: payload.gender,
+        isSocialAcc: payload.password === "",
       };
     case USER_UPDATE:
       return {

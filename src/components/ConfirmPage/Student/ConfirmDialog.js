@@ -39,7 +39,7 @@ function ConfirmDialog({ code }) {
                 </Typography>
                 </Box>
 
-                {course ?? <CourseInfo course={course} /> }
+                <CourseInfo course={course} />
 
                 <Button
                     onClick={handleConfirmJoin}

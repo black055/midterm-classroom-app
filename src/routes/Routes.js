@@ -9,11 +9,7 @@ export function AuthRoute({ loggedIn }) {
 }
 
 export function PrivateRoute({ loggedIn }) {
-  const prevPath = window.location.pathname || "/";
+  const prevPath = (window.location.pathname + window.location.search) || "/";
 
-  return loggedIn ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/login" state={{ from: prevPath }} />
-  );
+  return loggedIn ? <Outlet /> : <Navigate to="/login" state={{ from: prevPath }} />;
 }

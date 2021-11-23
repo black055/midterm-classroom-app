@@ -7,7 +7,7 @@ export default function MidComp({ role }) {
   const classes = useStyles();
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, flexBasis: 0, justifyContent: "center" }}>
       <NavLink end to="info" className={classes.navLink}>
         <Button color="inherit">Chi tiết</Button>
       </NavLink>

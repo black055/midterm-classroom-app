@@ -39,7 +39,7 @@ function ConfirmDialog({ inviteCode }) {
                 </Typography>
                 </Box>
 
-                {course ?? <CourseInfo course={course} teacher={true} /> }
+                <CourseInfo course={course} teacher={true} />
 
                 <Button 
                     onClick={handleConfirmJoin}

@@ -25,7 +25,7 @@ function ProfilePage() {
     <>
       <Routes>
         <Route path="/profile" element={<Profile info={user} />} />
-        <Route path="/password" element={<ChangePassWord />} />
+        <Route path="/password" element={<ChangePassWord isSocialAcc={user.isSocialAcc} />} />
       </Routes>
     </>
   );

@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../services/auth";
 
-export default function UserButton() {
+export default function UserButton({ style }) {
   const dispatch = useDispatch();
   const [userAnchorEl, setUserAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function UserButton() {
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center", ...style }}>
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -53,18 +53,20 @@ export default function UserButton() {
         }}
         open={Boolean(userAnchorEl)}
         onClose={handleUserClose}>
-        <MenuItem onClick={() => {
+        <MenuItem
+          onClick={() => {
             navigate("/user/u/profile");
             handleUserClose();
-          }} sx={{color: 'gray'}}>
-            <FaceIcon fontSize="small" sx={{marginRight: '10px'}} />
-            Thông tin
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={handleLogout} sx={{color: 'gray'}}>
-            <LogoutIcon fontSize="small" sx={{color: 'gray', marginRight: '10px'}} />
-            Đăng xuất
-          </MenuItem>
+          }}
+          sx={{ color: "gray" }}>
+          <FaceIcon fontSize="small" sx={{ marginRight: "10px" }} />
+          Thông tin
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleLogout} sx={{ color: "gray" }}>
+          <LogoutIcon fontSize="small" sx={{ color: "gray", marginRight: "10px" }} />
+          Đăng xuất
+        </MenuItem>
       </Menu>
     </Box>
   );

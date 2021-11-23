@@ -15,7 +15,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function ChangePassWord() {
+function ChangePassWord({ isSocialAcc }) {
   const [open, setOpen] = useState(false);
   const [notification, setNotification] = useState("");
   const [contentAlert, setContentAlert] = useState("");
@@ -75,6 +75,7 @@ function ChangePassWord() {
             <form method="post" className="update-password">
               <DialogContent>
                 <TextField
+                  disabled={isSocialAcc}
                   id="outlined-password-input"
                   label="Mật khẩu hiện tại"
                   type="password"
@@ -88,6 +89,7 @@ function ChangePassWord() {
                   }}
                 />
                 <TextField
+                  disabled={isSocialAcc}
                   label="Mật khẩu mới"
                   value={newPass}
                   margin="normal"
@@ -99,6 +101,7 @@ function ChangePassWord() {
                   }}
                 />
                 <TextField
+                  disabled={isSocialAcc}
                   label="Xác nhận mật khẩu mới"
                   value={confirmNewPass}
                   margin="normal"
@@ -111,6 +114,7 @@ function ChangePassWord() {
                 />
                 <DialogActions className="btn-create-class">
                   <Button
+                    disabled={isSocialAcc}
                     variant="text"
                     type="submit"
                     onClick={handleSubmit}
@@ -119,20 +123,11 @@ function ChangePassWord() {
                       backgroundColor: "#3498db",
                       color: "#ecf0f1",
                       ":hover": { backgroundColor: "#0abde3" },
-                    }}
-                  >
+                    }}>
                     <span className="btn-create-class__context">Cập nhật</span>
                   </Button>
-                  <Snackbar
-                    open={open}
-                    autoHideDuration={5000}
-                    onClose={handleClose}
-                  >
-                    <Alert
-                      onClose={handleClose}
-                      severity={notification}
-                      sx={{ width: "100%" }}
-                    >
+                  <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity={notification} sx={{ width: "100%" }}>
                       {contentAlert}
                     </Alert>
                   </Snackbar>
